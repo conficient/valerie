@@ -20,7 +20,7 @@
         "systemName": "valerie",
         "footer": "A validation library for KnockoutJS.",
         "copyright": "&copy; egrove Ltd 2013.",
-        "navType": "inline",
+        "navType": "vertical",
         "theme": "spacelab",
         "linenums": true,
         "collapseSymbols": false,
