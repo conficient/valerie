@@ -16,6 +16,14 @@
     "templates": {
         "default": {
             "outputSourceFiles": true
-        }
+        },
+        "systemName": "valerie",
+        "footer": "A validation library for KnockoutJS.",
+        "copyright": "&copy; egrove Ltd 2013.",
+        "navType": "inline",
+        "theme": "spacelab",
+        "linenums": true,
+        "collapseSymbols": false,
+        "inverseNav": false
     }
 }

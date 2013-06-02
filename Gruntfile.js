@@ -146,7 +146,7 @@ module.exports = function (grunt) {
         },
         "shell": {
             "docs": {
-                "command": "jsdoc -c jsdoc.conf.json",
+                "command": "jsdoc -c jsdoc.conf.json -t ../docstrap/template",
                 "stdout": true,
                 "stderr": true
             }
