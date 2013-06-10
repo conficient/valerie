@@ -156,7 +156,7 @@
                     blurHandler(element, observableOrComputed);
                 });
 
-                tagName = ko.utils.tagNameLower(element);
+                tagName = element.tagName.toLowerCase();
                 textualInput = (tagName === "input" && element.type.toLowerCase() === "text") || tagName === "textarea";
 
                 if (!textualInput) {

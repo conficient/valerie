@@ -769,10 +769,14 @@ var valerie = {};
         },
         touchedWriteFunction = function (value) {
             var index,
-                validationStates = this.validationStates();
+                validationStates = this.validationStates(),
+                validationState;
 
             for (index = 0; index < validationStates.length; index++) {
-                validationStates[index].touched(value);
+                validationState = validationStates[index];
+                if (validationState.isApplicable()) {
+                    validationState.touched(value);
+                }
             }
         };
 
@@ -900,8 +904,8 @@ var valerie = {};
          * @method
          * @return {boolean} <code>true</code> if the model is applicable, <code>false</code> otherwise
          */
-        this.isApplicable = function() {
-            return this.settings.applicable;
+        this.isApplicable = function () {
+            return this.settings.applicable();
         };
 
         //noinspection JSValidateJSDoc
@@ -1094,7 +1098,7 @@ var valerie = {};
                 for (index = 0; index < states.length; index++) {
                     state = states[index];
 
-                    if (state.updateSummary) {
+                    if (state.isApplicable() && state.updateSummary) {
                         state.updateSummary(true);
                     }
                 }
@@ -1778,7 +1782,7 @@ var valerie = {};
                     blurHandler(element, observableOrComputed);
                 });
 
-                tagName = ko.utils.tagNameLower(element);
+                tagName = element.tagName.toLowerCase();
                 textualInput = (tagName === "input" && element.type.toLowerCase() === "text") || tagName === "textarea";
 
                 if (!textualInput) {
@@ -1998,6 +2002,19 @@ var valerie = {};
             function (element, valueAccessor, allBindingsAccessor, viewModel) {
                 var functionToApply = function (validationState) {
                     ko.utils.setTextContent(element, validationState.message());
+                };
+
+                applyForValidationState(functionToApply, element, valueAccessor, allBindingsAccessor, viewModel);
+            });
+
+        /**
+         * Makes the element visible if the chosen property or model is applicable, invisible otherwise.
+         * @name ko.bindingHandlers.visibleWhenApplicable
+         */
+        koBindingHandlers.visibleWhenApplicable = isolatedBindingHandler(
+            function (element, valueAccessor, allBindingsAccessor, viewModel) {
+                var functionToApply = function (validationState) {
+                    setElementVisibility(element, validationState.isApplicable());
                 };
 
                 applyForValidationState(functionToApply, element, valueAccessor, allBindingsAccessor, viewModel);
