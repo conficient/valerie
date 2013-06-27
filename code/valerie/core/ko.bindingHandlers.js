@@ -10,7 +10,8 @@
         getValidationState = valerie.validationState.getFor,
         koBindingHandlers = ko.bindingHandlers,
         koRegisterEventHandler = ko.utils.registerEventHandler,
-        isolatedBindingHandler = valerie.koExtras.isolatedBindingHandler;
+        isolatedBindingHandler = valerie.koExtras.isolatedBindingHandler,
+        stringTrimRegex = /^(\s|\u00A0)+|(\s|\u00A0)+$/g;
 
     // Define validatedChecked and validatedValue binding handlers.
     (function () {
@@ -44,7 +45,7 @@
                 validationState.showMessage.paused(true);
             },
             textualInputKeyUpHandler = function (element, observableOrComputed) {
-                var enteredValue = ko.utils.stringTrim(element.value),
+                var enteredValue = (element.value || "").replace(stringTrimRegex, ""),
                     parsedValue,
                     validationState = getValidationState(observableOrComputed),
                     settings = validationState.settings,
