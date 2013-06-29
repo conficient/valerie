@@ -4,12 +4,12 @@
     },
     "source": {
         "include": [
-            "code/valerie/documentation-extras.js",
-            "code/valerie/core",
-            "code/valerie/full",
-            "code/valerie/localisation/en",
-            "code/valerie/localisation/en-gb",
-            "code/valerie/localisation/en-us"
+            "lib/documentation-extras.js",
+            "lib/core",
+            "lib/full",
+            "lib/localisation/en",
+            "lib/localisation/en-gb",
+            "lib/localisation/en-us"
         ],
         "includePattern": ".+\\.js(doc)?$"
     },

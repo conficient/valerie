@@ -3,8 +3,6 @@ valerie
 
 [![Build Status](https://travis-ci.org/egrove/valerie.png?branch=master)](https://travis-ci.org/egrove/valerie)
 
-[![browser support](https://ci.testling.com/egrove/valerie.png)](https://ci.testling.com/egrove/valerie)
-
 A validation library for Knockout.
 
 Features include:

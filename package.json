@@ -35,15 +35,5 @@
     },
     "scripts": {
         "test": "grunt tests --verbose"
-    },
-    "testling": {
-        "html": [
-            "code/tests/built/SpecRunner.html"
-        ],
-        "browsers": [
-            "chrome/latest",
-            "firefox/latest",
-            "ie/6..latest"
-        ]
     }
 }

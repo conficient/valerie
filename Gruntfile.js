@@ -2,15 +2,16 @@ module.exports = function (grunt) {
     grunt.initConfig({
         "pkg": grunt.file.readJSON("package.json"),
         "clean": {
-            "docs": [
-                "latest/apidocs"
-            ],
             "build": [
                 "build"
-            ]
+            ],
+            "updateLatest": [
+                "latest/apidocs",
+                "latest/code"
+            ]            
         },
         "copy": {
-            "updateLatestCode": {
+            "updateLatest": {
                 "files": [
                     {
                         "expand": true,
@@ -19,80 +20,60 @@ module.exports = function (grunt) {
                         "dest": "latest/code"
                     }
                 ]
-            },
-            "updateRunner": {
-                "files": [
-                    {
-                        "expand": true,
-                        "cwd": ".grunt/grunt-contrib-jasmine",
-                        "src": ["*"],
-                        "dest": "code/tests/built/"
-                    },
-                    {
-                        "src": ["_SpecRunner.html"],
-                        "dest": "code/tests/built/SpecRunner.html"
-                    },
-                    {
-                        "expand": true,
-                        "cwd": "build",
-                        "src": ["valerie*.js"],
-                        "dest": "code/tests/built/"
-                    }
-                ]
             }
         },
         "concat": {
             "core": {
                 "src": [
-                    "code/valerie/core/valerie.namespace.js",
-                    "code/valerie/core/valerie.utils.js",
-                    "code/valerie/core/valerie.formatting.js",
-                    "code/valerie/core/valerie.dom.js",
-                    "code/valerie/core/valerie.koExtras.js",
-                    "code/valerie/core/valerie.converters.js",
-                    "code/valerie/core/valerie.validationResult.js",
-                    "code/valerie/core/valerie.validationState.js",
-                    "code/valerie/core/valerie.modelValidationState.js",
-                    "code/valerie/core/valerie.propertyValidationState.js",
-                    "code/valerie/core/ko.computed.fn.js",
-                    "code/valerie/core/ko.observable.fn.js",
-                    "code/valerie/core/ko.bindingHandlers.js",
-                    "code/valerie/core/valerie.koBindingsHelper.js"
+                    "lib/core/valerie.namespace.js",
+                    "lib/core/valerie.utils.js",
+                    "lib/core/valerie.formatting.js",
+                    "lib/core/valerie.dom.js",
+                    "lib/core/valerie.koExtras.js",
+                    "lib/core/valerie.converters.js",
+                    "lib/core/valerie.validationResult.js",
+                    "lib/core/valerie.validationState.js",
+                    "lib/core/valerie.modelValidationState.js",
+                    "lib/core/valerie.propertyValidationState.js",
+                    "lib/core/ko.computed.fn.js",
+                    "lib/core/ko.observable.fn.js",
+                    "lib/core/ko.bindingHandlers.js",
+                    "lib/core/valerie.koBindingsHelper.js"
                 ],
                 "dest": "build/valerie-core.js"
             },
             "full": {
                 "src": [
                     "build/valerie-core.js",
-                    "code/valerie/full/valerie.numericHelper.js",
-                    "code/valerie/full/valerie.converters.full.js",
-                    "code/valerie/full/valerie.rules.js",
-                    "code/valerie/full/valerie.propertyValidationState-fluentConverters.js",
-                    "code/valerie/full/valerie.propertyValidationState-fluentRules.js"
+                    "lib/full/valerie.numericHelper.js",
+                    "lib/full/valerie.converters.full.js",
+                    "lib/full/valerie.rules.js",
+                    "lib/full/valerie.propertyValidationState-fluentConverters.js",
+                    "lib/full/valerie.propertyValidationState-fluentRules.js"
                 ],
                 "dest": "build/valerie.js"
             },
             "en": {
                 "src": [
                     "build/valerie.js",
-                    "code/valerie/localisation/en/core-en.js",
-                    "code/valerie/localisation/en/full-en.js"
+                    "lib/localisation/en/core-en.js",
+                    "lib/localisation/en/full-en.js"
                 ],
                 "dest": "build/valerie-en.js"
             },
             "en-gb": {
                 "src": [
                     "build/valerie-en.js",
-                    "code/valerie/localisation/en-gb/full-en-gb.js",
-                    "code/valerie/localisation/en-gb/valerie.converters-en-gb.js",
-                    "code/valerie/localisation/en-gb/valerie.propertyValidationState-fluentConverters-en-gb.js"
+                    "lib/localisation/en-gb/full-en-gb.js",
+                    "lib/localisation/en-gb/valerie.converters-en-gb.js",
+                    "lib/localisation/en-gb/valerie.propertyValidationState-fluentConverters-en-gb.js"
                 ],
                 "dest": "build/valerie-en-gb.js"
             },
             "en-us": {
                 "src": [
                     "build/valerie-en.js",
-                    "code/valerie/localisation/en-us/full-en-us.js"
+                    "lib/localisation/en-us/full-en-us.js"
                 ],
                 "dest": "build/valerie-en-us.js"
             }
@@ -104,10 +85,10 @@ module.exports = function (grunt) {
                 },
                 "files": [
                     {
-                        "cwd": "code/samples/jade",
+                        "cwd": "samples/jade",
                         "expand": true,
                         "src": ["*.jade"],
-                        "dest": "code/samples",
+                        "dest": "samples",
                         "ext": ".html"
                     }
                 ]
@@ -119,17 +100,12 @@ module.exports = function (grunt) {
                 "options": {
                     "keepRunner": true,
                     "specs": [
-                        "code/tests/core/*.tests.js",
-                        "code/tests/full/*.tests.js"
+                        "tests/core/*.tests.js",
+                        "tests/full/*.tests.js"
                     ],
                     "vendor": [
-                        "code/tests/runnerScripts/ddr-ecma5-1.2.1-min.js",
-                        "code/tests/runnerScripts/jasmine-tap.js",
-                        "code/tests/runnerScripts/testling.js",
-                        "code/thirdParty/html5shiv.js",
-                        "code/thirdParty/json3.min.js",
-                        "code/thirdParty/knockout-2.2.1.debug.js",
-                        "code/thirdParty/jquery-1.9.1.min.js"
+                        "thirdParty/knockout-2.2.1.debug.js",
+                        "thirdParty/jquery-1.9.1.min.js"
                     ]
                 }
             }
@@ -145,27 +121,10 @@ module.exports = function (grunt) {
             }
         },
         "shell": {
-            "docs": {
+            "updateLatest": {
                 "command": "jsdoc -c jsdoc.conf.json -t ../docstrap/template",
                 "stdout": true,
                 "stderr": true
-            }
-        },
-        "sed": {
-            "updateRunner1": {
-                "pattern": /(\.\/)?.grunt\/grunt-contrib-jasmine\//g,
-                "replacement": "",
-                "path": "code/tests/built/SpecRunner.html"
-            },
-            "updateRunner2": {
-                "pattern": /\.\/code\//g,
-                "replacement": "../../",
-                "path": "code/tests/built/SpecRunner.html"
-            },
-            "updateRunner3": {
-                "pattern": /\.\/build\//g,
-                "replacement": "",
-                "path": "code/tests/built/SpecRunner.html"
             }
         },
         "uglify": {
@@ -194,10 +153,14 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks("grunt-contrib-copy");
     grunt.loadNpmTasks("grunt-contrib-uglify");
     grunt.loadNpmTasks("grunt-shell");
-    grunt.loadNpmTasks("grunt-sed");
 
     grunt.registerTask("default", [
         "build"
+    ]);
+
+    grunt.registerTask("build", [
+        "tests",
+        "uglify"
     ]);
 
     grunt.registerTask("concatAndHint", [
@@ -210,20 +173,6 @@ module.exports = function (grunt) {
         "jshint"
     ]);
 
-    grunt.registerTask("build", [
-        "tests",
-        "copy:updateRunner",
-        "sed:updateRunner1",
-        "sed:updateRunner2",
-        "sed:updateRunner3",
-        "uglify"
-    ]);
-
-    grunt.registerTask("docs", [
-        "clean:docs",
-        "shell:docs"
-    ]);
-
     grunt.registerTask("samples", [
         "jade:samples"
     ]);
@@ -233,13 +182,9 @@ module.exports = function (grunt) {
         "jasmine"
     ]);
 
-    grunt.registerTask("updateLatestCode", [
-        "build",
-        "copy:updateLatestCode"
-    ]);
-
     grunt.registerTask("updateLatest", [
-        "updateLatestCode",
-        "docs"
+        "clean:updateLatest",
+        "copy:updateLatest",
+        "shell:updateLatest"
     ]);
 };
