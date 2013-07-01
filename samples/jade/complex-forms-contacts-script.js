@@ -1,6 +1,6 @@
 function RunSample() {
     function Contact() {
-        var self = valerie.validatableModel({
+        return valerie.validatableModel({
             "firstName": ko.observable()
                 .validate()
                 .string()
@@ -23,8 +23,6 @@ function RunSample() {
             .name("Contact")
             .validateChildProperties()
             .end();
-
-        return self;
     }
 
     function ViewModel() {
@@ -79,4 +77,4 @@ function RunSample() {
     ko.applyBindings(viewModel, document.getElementById("sample"));
 
     return viewModel;
-};
+}

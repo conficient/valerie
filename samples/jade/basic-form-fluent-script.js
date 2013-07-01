@@ -30,4 +30,4 @@ function RunSample() {
     ko.applyBindings(viewModel, document.getElementById("sample"));
 
     return viewModel;
-};
+}
