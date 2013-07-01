@@ -258,7 +258,6 @@ var valerie = {};
     /**
      * Contains utilities for working with the HTML document object model.
      * @namespace
-     * @inner
      */
     valerie.dom = {};
 
@@ -471,7 +470,7 @@ var valerie = {};
     /**
      * A converter which formats and parses strings.
      * Used as the default converter in numerous places throughout the library.
-     * @name valerie.converters~passThrough
+     * @name valerie.converters.passThrough
      * @type valerie.IConverter
      */
     valerie.converters.passThrough = {

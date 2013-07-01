@@ -447,6 +447,14 @@
         if (index >= 0) {
             rule = stateRules[index];
             rule.settings.failureMessageFormat = failureMessageFormat;
+
+            if(rule.settings.failureMessageFormatForMaximumOnly != null) {
+                rule.settings.failureMessageFormatForMaximumOnly = failureMessageFormat;
+            }
+
+            if(rule.settings.failureMessageFormatForMinimumOnly != null) {
+                rule.settings.failureMessageFormatForMinimumOnly = failureMessageFormat;
+            }
         }
 
         return this;

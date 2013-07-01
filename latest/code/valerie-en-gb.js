@@ -258,7 +258,6 @@ var valerie = {};
     /**
      * Contains utilities for working with the HTML document object model.
      * @namespace
-     * @inner
      */
     valerie.dom = {};
 
@@ -471,7 +470,7 @@ var valerie = {};
     /**
      * A converter which formats and parses strings.
      * Used as the default converter in numerous places throughout the library.
-     * @name valerie.converters~passThrough
+     * @name valerie.converters.passThrough
      * @type valerie.IConverter
      */
     valerie.converters.passThrough = {
@@ -2359,7 +2358,7 @@ var valerie = {};
      * By setting <b>valerie.converters.date.monthBeforeDate</b> to <code>true</code> date strings in
      * <code>mm/dd/yyyy</code> or <code>mm-dd-yyyy</code> can be parsed.</br>
      * <i>[full]</i>
-     * @name valerie.converters~date
+     * @name valerie.converters.date
      * @type valerie.IConverter
      */
     converters.date = {
@@ -2437,7 +2436,7 @@ var valerie = {};
      * <b>valerie.converters.currency.numericHelper</b> is used to parse and format values; this is defaulted to
      * <b>valerie.converters.defaultNumericHelper</b>.<br/>
      * <i>[full]</i>
-     * @name valerie.converters~currencyMajor
+     * @name valerie.converters.currencyMajor
      * @type valerie.IConverter
      */
     converters.currencyMajor = {
@@ -2462,7 +2461,7 @@ var valerie = {};
      * <b>valerie.converters.currency.numericHelper</b> is used to parse and format values; this is defaulted to
      * <b>valerie.converters.defaultNumericHelper</b>.<br/>
      * <i>[full]</i>
-     * @name valerie.converters~currencyMajorMinor
+     * @name valerie.converters.currencyMajorMinor
      * @type valerie.IConverter
      */
     converters.currencyMajorMinor = {
@@ -2489,7 +2488,7 @@ var valerie = {};
     /**
      * A converter for e-mail addresses.<br/>
      * <i>[full]</i>
-     * @name valerie.converters~email
+     * @name valerie.converters.email
      * @type valerie.IConverter
      */
     converters.email = {
@@ -2516,7 +2515,7 @@ var valerie = {};
     /**
      * A converter for non-integer number values.<br/>
      * <i>[full]</i>
-     * @name valerie.converters~float
+     * @name valerie.converters.float
      * @type valerie.IConverter
      */
     converters.float = {
@@ -2543,7 +2542,7 @@ var valerie = {};
     /**
      * A converter for integer values.<br/>
      * <i>[full]</i>
-     * @name valerie.converters~integer
+     * @name valerie.converters.integer
      * @type valerie.IConverter
      */
     converters.integer = {
@@ -2570,7 +2569,7 @@ var valerie = {};
     /**
      * A converter for Javascript Number values.<br/>
      * <i>[full]</i>
-     * @name valerie.converters~number
+     * @name valerie.converters.number
      * @type valerie.IConverter
      */
     converters.number = {
@@ -2597,7 +2596,7 @@ var valerie = {};
     };
 })();
 
-(function() {
+(function () {
     "use strict";
 
     /**
@@ -2623,7 +2622,7 @@ var valerie = {};
      * @param {number|function} maximumValueOrFunction a value or function that specifies the maximum permitted length
      * @param {valerie.IRule.options} [options] the options to use when constructing the rule
      */
-    rules.ArrayLength = function(minimumValueOrFunction, maximumValueOrFunction, options) {
+    rules.ArrayLength = function (minimumValueOrFunction, maximumValueOrFunction, options) {
         if (arguments.length < 2) {
             throw "At least 2 arguments are expected.";
         }
@@ -2657,7 +2656,7 @@ var valerie = {};
      * @param {date|function} maximumValueOrFunction a value or function that specifies the latest permitted date
      * @param {valerie.IRule.options} [options] the options to use when constructing the rule
      */
-    rules.During = function(minimumValueOrFunction, maximumValueOrFunction, options) {
+    rules.During = function (minimumValueOrFunction, maximumValueOrFunction, options) {
         if (arguments.length < 2) {
             throw "At least 2 arguments are expected.";
         }
@@ -2687,15 +2686,24 @@ var valerie = {};
      * @name valerie.rules.Expression
      * @type valerie.IRule
      * @constructor
-     * @param {string|RegExp} regularExpressionObjectOrString the regular expression
+     * @param {string|RegExp|Function} regularExpressionObjectStringOrFunction the regular expression
      * @param {valerie.IRule.options} [options] the options to use when constructing the rule
      */
-    rules.Expression = function(regularExpressionObjectOrString, options) {
-        this.expression = utils.isString(regularExpressionObjectOrString) ?
-            new RegExp(regularExpressionObjectOrString) :
-            regularExpressionObjectOrString;
-
+    rules.Expression = function (regularExpressionObjectStringOrFunction, options) {
         this.settings = utils.mergeOptions(rules.Expression.defaultOptions, options);
+
+        if (utils.isFunction(regularExpressionObjectStringOrFunction)) {
+            this.expression = regularExpressionObjectStringOrFunction;
+            return;
+        }
+
+        if (utils.isString(regularExpressionObjectStringOrFunction)) {
+            regularExpressionObjectStringOrFunction = new RegExp(regularExpressionObjectStringOrFunction);
+        }
+
+        this.expression = function () {
+            return regularExpressionObjectStringOrFunction;
+        };
     };
 
     /**
@@ -2710,11 +2718,19 @@ var valerie = {};
     };
 
     rules.Expression.prototype = {
-        "test": function(value) {
-            var failureMessage;
+        "test": function (value) {
+            var failureMessage,
+                expression;
 
             if (value != null) {
-                if (this.expression.test(value)) {
+                expression = this.expression();
+
+                if(utils.isString(expression)) {
+                    //noinspection JSValidateTypes
+                    expression = new RegExp(expression);
+                }
+
+                if (expression.test(value)) {
                     return passedValidationResult;
                 }
             }
@@ -2738,7 +2754,7 @@ var valerie = {};
      * @param {number|function} maximumValueOrFunction a value or function that specifies the maximum permitted value
      * @param {valerie.IRule.options} [options] the options to use when constructing the rule
      */
-    rules.Length = function(minimumValueOrFunction, maximumValueOrFunction, options) {
+    rules.Length = function (minimumValueOrFunction, maximumValueOrFunction, options) {
         if (arguments.length < 2) {
             throw "At least 2 arguments are expected.";
         }
@@ -2747,7 +2763,7 @@ var valerie = {};
 
         var rangeRule = new rules.Range(minimumValueOrFunction, maximumValueOrFunction, options);
 
-        this.test = function(value) {
+        this.test = function (value) {
             var length;
 
             if (value != null && value.hasOwnProperty("length")) {
@@ -2782,7 +2798,7 @@ var valerie = {};
      * @param {*} permittedValueOrFunction a value or function that specifies the permitted value
      * @param {valerie.IRule.options} [options] the options to use when constructing the rule
      */
-    rules.Matches = function(permittedValueOrFunction, options) {
+    rules.Matches = function (permittedValueOrFunction, options) {
         options = utils.mergeOptions(rules.Matches.defaultOptions, options);
 
         return new rules.OneOf([permittedValueOrFunction], options);
@@ -2809,7 +2825,7 @@ var valerie = {};
      * @param {array} forbiddenValuesOrFunction a value or function that specifies the forbidden values
      * @param {valerie.IRule.options} [options] the options to use when constructing the rule
      */
-    rules.NoneOf = function(forbiddenValuesOrFunction, options) {
+    rules.NoneOf = function (forbiddenValuesOrFunction, options) {
         this.forbiddenValues = utils.asFunction(forbiddenValuesOrFunction);
         this.settings = utils.mergeOptions(rules.NoneOf.defaultOptions, options);
     };
@@ -2826,7 +2842,7 @@ var valerie = {};
     };
 
     rules.NoneOf.prototype = {
-        "test": function(value) {
+        "test": function (value) {
             var failureMessage,
                 index,
                 values = this.forbiddenValues();
@@ -2855,7 +2871,7 @@ var valerie = {};
      * @param {*} forbiddenValueOrFunction a value or function that specifies the forbidden value
      * @param {valerie.IRule.options} [options] the options to use when constructing the rule
      */
-    rules.Not = function(forbiddenValueOrFunction, options) {
+    rules.Not = function (forbiddenValueOrFunction, options) {
         options = utils.mergeOptions(rules.Not.defaultOptions, options);
 
         return new rules.NoneOf([forbiddenValueOrFunction], options);
@@ -2881,7 +2897,7 @@ var valerie = {};
      * @param {array} permittedValuesOrFunction a value or function that specifies the permitted values
      * @param {valerie.IRule.options} [options] the options to use when constructing the rule
      */
-    rules.OneOf = function(permittedValuesOrFunction, options) {
+    rules.OneOf = function (permittedValuesOrFunction, options) {
         this.permittedValues = utils.asFunction(permittedValuesOrFunction);
         this.settings = utils.mergeOptions(rules.OneOf.defaultOptions, options);
     };
@@ -2898,7 +2914,7 @@ var valerie = {};
     };
 
     rules.OneOf.prototype = {
-        "test": function(value) {
+        "test": function (value) {
             var failureMessage,
                 index,
                 values = this.permittedValues();
@@ -2928,7 +2944,7 @@ var valerie = {};
      * @param {number|function} maximumValueOrFunction a value or function that specifies the maximum permitted value
      * @param {valerie.IRule.options} [options] the options to use when constructing the rule
      */
-    rules.Range = function(minimumValueOrFunction, maximumValueOrFunction, options) {
+    rules.Range = function (minimumValueOrFunction, maximumValueOrFunction, options) {
         if (arguments.length < 2 || arguments.length > 3) {
             throw "At least 2 arguments are expected.";
         }
@@ -2952,7 +2968,7 @@ var valerie = {};
     };
 
     rules.Range.prototype = {
-        "test": function(value) {
+        "test": function (value) {
             var failureMessage,
                 failureMessageFormat = this.settings.failureMessageFormat,
                 maximum = this.maximum(),
@@ -3007,7 +3023,7 @@ var valerie = {};
      * @param {number|function} maximumValueOrFunction a value or function that specifies the maximum permitted length
      * @param {valerie.IRule.options} [options] the options to use when constructing the rule
      */
-    rules.StringLength = function(minimumValueOrFunction, maximumValueOrFunction, options) {
+    rules.StringLength = function (minimumValueOrFunction, maximumValueOrFunction, options) {
         if (arguments.length < 2) {
             throw "At least 2 arguments are expected.";
         }
@@ -3457,6 +3473,14 @@ var valerie = {};
         if (index >= 0) {
             rule = stateRules[index];
             rule.settings.failureMessageFormat = failureMessageFormat;
+
+            if(rule.settings.failureMessageFormatForMaximumOnly != null) {
+                rule.settings.failureMessageFormatForMaximumOnly = failureMessageFormat;
+            }
+
+            if(rule.settings.failureMessageFormatForMinimumOnly != null) {
+                rule.settings.failureMessageFormatForMinimumOnly = failureMessageFormat;
+            }
         }
 
         return this;
@@ -3536,7 +3560,7 @@ var valerie = {};
     /**
      * A converter for postcodes.<br/>
      * <i>[full, en-gb]</i>
-     * @name valerie.converters~postcode
+     * @name valerie.converters.postcode
      * @type valerie.IConverter
      */
     converters.postcode = {

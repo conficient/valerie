@@ -179,7 +179,7 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>﻿(function() {
+            <pre class="prettyprint source linenums"><code>﻿(function () {
     "use strict";
 
     /**
@@ -205,7 +205,7 @@
      * @param {number|function} maximumValueOrFunction a value or function that specifies the maximum permitted length
      * @param {valerie.IRule.options} [options] the options to use when constructing the rule
      */
-    rules.ArrayLength = function(minimumValueOrFunction, maximumValueOrFunction, options) {
+    rules.ArrayLength = function (minimumValueOrFunction, maximumValueOrFunction, options) {
         if (arguments.length &lt; 2) {
             throw "At least 2 arguments are expected.";
         }
@@ -239,7 +239,7 @@
      * @param {date|function} maximumValueOrFunction a value or function that specifies the latest permitted date
      * @param {valerie.IRule.options} [options] the options to use when constructing the rule
      */
-    rules.During = function(minimumValueOrFunction, maximumValueOrFunction, options) {
+    rules.During = function (minimumValueOrFunction, maximumValueOrFunction, options) {
         if (arguments.length &lt; 2) {
             throw "At least 2 arguments are expected.";
         }
@@ -269,15 +269,24 @@
      * @name valerie.rules.Expression
      * @type valerie.IRule
      * @constructor
-     * @param {string|RegExp} regularExpressionObjectOrString the regular expression
+     * @param {string|RegExp|Function} regularExpressionObjectStringOrFunction the regular expression
      * @param {valerie.IRule.options} [options] the options to use when constructing the rule
      */
-    rules.Expression = function(regularExpressionObjectOrString, options) {
-        this.expression = utils.isString(regularExpressionObjectOrString) ?
-            new RegExp(regularExpressionObjectOrString) :
-            regularExpressionObjectOrString;
-
+    rules.Expression = function (regularExpressionObjectStringOrFunction, options) {
         this.settings = utils.mergeOptions(rules.Expression.defaultOptions, options);
+
+        if (utils.isFunction(regularExpressionObjectStringOrFunction)) {
+            this.expression = regularExpressionObjectStringOrFunction;
+            return;
+        }
+
+        if (utils.isString(regularExpressionObjectStringOrFunction)) {
+            regularExpressionObjectStringOrFunction = new RegExp(regularExpressionObjectStringOrFunction);
+        }
+
+        this.expression = function () {
+            return regularExpressionObjectStringOrFunction;
+        };
     };
 
     /**
@@ -292,11 +301,19 @@
     };
 
     rules.Expression.prototype = {
-        "test": function(value) {
-            var failureMessage;
+        "test": function (value) {
+            var failureMessage,
+                expression;
 
             if (value != null) {
-                if (this.expression.test(value)) {
+                expression = this.expression();
+
+                if(utils.isString(expression)) {
+                    //noinspection JSValidateTypes
+                    expression = new RegExp(expression);
+                }
+
+                if (expression.test(value)) {
                     return passedValidationResult;
                 }
             }
@@ -320,7 +337,7 @@
      * @param {number|function} maximumValueOrFunction a value or function that specifies the maximum permitted value
      * @param {valerie.IRule.options} [options] the options to use when constructing the rule
      */
-    rules.Length = function(minimumValueOrFunction, maximumValueOrFunction, options) {
+    rules.Length = function (minimumValueOrFunction, maximumValueOrFunction, options) {
         if (arguments.length &lt; 2) {
             throw "At least 2 arguments are expected.";
         }
@@ -329,7 +346,7 @@
 
         var rangeRule = new rules.Range(minimumValueOrFunction, maximumValueOrFunction, options);
 
-        this.test = function(value) {
+        this.test = function (value) {
             var length;
 
             if (value != null && value.hasOwnProperty("length")) {
@@ -364,7 +381,7 @@
      * @param {*} permittedValueOrFunction a value or function that specifies the permitted value
      * @param {valerie.IRule.options} [options] the options to use when constructing the rule
      */
-    rules.Matches = function(permittedValueOrFunction, options) {
+    rules.Matches = function (permittedValueOrFunction, options) {
         options = utils.mergeOptions(rules.Matches.defaultOptions, options);
 
         return new rules.OneOf([permittedValueOrFunction], options);
@@ -391,7 +408,7 @@
      * @param {array} forbiddenValuesOrFunction a value or function that specifies the forbidden values
      * @param {valerie.IRule.options} [options] the options to use when constructing the rule
      */
-    rules.NoneOf = function(forbiddenValuesOrFunction, options) {
+    rules.NoneOf = function (forbiddenValuesOrFunction, options) {
         this.forbiddenValues = utils.asFunction(forbiddenValuesOrFunction);
         this.settings = utils.mergeOptions(rules.NoneOf.defaultOptions, options);
     };
@@ -408,7 +425,7 @@
     };
 
     rules.NoneOf.prototype = {
-        "test": function(value) {
+        "test": function (value) {
             var failureMessage,
                 index,
                 values = this.forbiddenValues();
@@ -437,7 +454,7 @@
      * @param {*} forbiddenValueOrFunction a value or function that specifies the forbidden value
      * @param {valerie.IRule.options} [options] the options to use when constructing the rule
      */
-    rules.Not = function(forbiddenValueOrFunction, options) {
+    rules.Not = function (forbiddenValueOrFunction, options) {
         options = utils.mergeOptions(rules.Not.defaultOptions, options);
 
         return new rules.NoneOf([forbiddenValueOrFunction], options);
@@ -463,7 +480,7 @@
      * @param {array} permittedValuesOrFunction a value or function that specifies the permitted values
      * @param {valerie.IRule.options} [options] the options to use when constructing the rule
      */
-    rules.OneOf = function(permittedValuesOrFunction, options) {
+    rules.OneOf = function (permittedValuesOrFunction, options) {
         this.permittedValues = utils.asFunction(permittedValuesOrFunction);
         this.settings = utils.mergeOptions(rules.OneOf.defaultOptions, options);
     };
@@ -480,7 +497,7 @@
     };
 
     rules.OneOf.prototype = {
-        "test": function(value) {
+        "test": function (value) {
             var failureMessage,
                 index,
                 values = this.permittedValues();
@@ -510,7 +527,7 @@
      * @param {number|function} maximumValueOrFunction a value or function that specifies the maximum permitted value
      * @param {valerie.IRule.options} [options] the options to use when constructing the rule
      */
-    rules.Range = function(minimumValueOrFunction, maximumValueOrFunction, options) {
+    rules.Range = function (minimumValueOrFunction, maximumValueOrFunction, options) {
         if (arguments.length &lt; 2 || arguments.length > 3) {
             throw "At least 2 arguments are expected.";
         }
@@ -534,7 +551,7 @@
     };
 
     rules.Range.prototype = {
-        "test": function(value) {
+        "test": function (value) {
             var failureMessage,
                 failureMessageFormat = this.settings.failureMessageFormat,
                 maximum = this.maximum(),
@@ -589,7 +606,7 @@
      * @param {number|function} maximumValueOrFunction a value or function that specifies the maximum permitted length
      * @param {valerie.IRule.options} [options] the options to use when constructing the rule
      */
-    rules.StringLength = function(minimumValueOrFunction, maximumValueOrFunction, options) {
+    rules.StringLength = function (minimumValueOrFunction, maximumValueOrFunction, options) {
         if (arguments.length &lt; 2) {
             throw "At least 2 arguments are expected.";
         }
