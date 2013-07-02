@@ -11,6 +11,8 @@ module.exports = function (grunt) {
             ]            
         },
         "copy": {
+            "samples": {
+            },
             "updateLatest": {
                 "files": [
                     {
@@ -37,8 +39,8 @@ module.exports = function (grunt) {
                     "lib/core/valerie.propertyValidationState.js",
                     "lib/core/ko.computed.fn.js",
                     "lib/core/ko.observable.fn.js",
-                    "lib/core/ko.bindingHandlers.js",
-                    "lib/core/valerie.koBindingsHelper.js"
+                    "lib/core/valerie.koBindingsHelper.js",
+                    "lib/core/ko.bindingHandlers.js"
                 ],
                 "dest": "build/valerie-core.js"
             },
@@ -104,7 +106,7 @@ module.exports = function (grunt) {
                         "tests/full/*.tests.js"
                     ],
                     "vendor": [
-                        "thirdParty/knockout-2.2.1.debug.js",
+                        "thirdParty/knockout-2.2.1.js",
                         "thirdParty/jquery-1.9.1.min.js"
                     ]
                 }
@@ -159,8 +161,9 @@ module.exports = function (grunt) {
     ]);
 
     grunt.registerTask("build", [
-        "tests",
-        "uglify"
+        "concatAndHint",
+        "uglify",
+        "tests"
     ]);
 
     grunt.registerTask("concatAndHint", [
@@ -174,11 +177,13 @@ module.exports = function (grunt) {
     ]);
 
     grunt.registerTask("samples", [
+        "concatAndHint",
+        "uglify",
+        "copy:samples",
         "jade:samples"
     ]);
 
     grunt.registerTask("tests", [
-        "concatAndHint",
         "jasmine"
     ]);
 

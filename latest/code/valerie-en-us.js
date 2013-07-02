@@ -1626,6 +1626,46 @@ var valerie = {};
 (function () {
     "use strict";
 
+    var
+        koCheckedBindingHandler = ko.bindingHandlers.checked,
+        koValueBindingHandler = ko.bindingHandlers.value;
+
+    /**
+     * Contains helper functions for working with valerie's Knockout binding handlers.
+     * @namespace
+     */
+    valerie.koBindingsHelper = {
+        /**
+         * Sets the textual content for the given element.
+         * @name valerie.koBindingsHelper#setInnerText
+         * @param {string} text the text to use
+         */
+        "setTextContent": function (element, text) {
+            ko.bindingHandlers.text.update(element, function () { return text; });
+        },
+        /**
+         * Restores the original <b>checked</b> and <b>value</b> binding handlers.
+         * @name valerie.koBindingsHelper#useOriginalBindingHandlers
+         * @function
+         */
+        "useOriginalBindingHandlers": function () {
+            ko.bindingHandlers.checked = koCheckedBindingHandler;
+            ko.bindingHandlers.value = koValueBindingHandler;
+        },
+        /**
+         * Replaces the <b>checked</b> and <b>value</b> binding handlers with the validating equivalents.
+         * @name valerie.koBindingsHelper#useValidatingBindingHandlers
+         * @function
+         */
+        "useValidatingBindingHandlers": function () {
+            ko.bindingHandlers.checked = ko.bindingHandlers.validatedChecked;
+            ko.bindingHandlers.value = ko.bindingHandlers.validatedValue;
+        }
+    };
+})();
+(function () {
+    "use strict";
+
     // Shortcuts.
     var passedValidationResult = valerie.ValidationResult.passedInstance,
         utils = valerie.utils,
@@ -1634,6 +1674,7 @@ var valerie = {};
         converters = valerie.converters,
         getValidationState = valerie.validationState.getFor,
         koBindingHandlers = ko.bindingHandlers,
+        koBindingsHelper = valerie.koBindingsHelper,
         koRegisterEventHandler = ko.utils.registerEventHandler,
         isolatedBindingHandler = valerie.koExtras.isolatedBindingHandler,
         stringTrimRegex = /^(\s|\u00A0)+|(\s|\u00A0)+$/g;
@@ -1917,7 +1958,8 @@ var valerie = {};
                     valueFormat = bindings.valueFormat;
                 }
 
-                ko.utils.setTextContent(element, formatter(value, valueFormat));
+                var text = formatter(value, valueFormat);
+                koBindingsHelper.setTextContent(element, text);
             });
 
         /**
@@ -1988,7 +2030,9 @@ var valerie = {};
             function (element, valueAccessor, allBindingsAccessor, viewModel) {
                 var functionToApply = function (validationState) {
                     setElementVisibility(element, validationState.showMessage());
-                    ko.utils.setTextContent(element, validationState.message());
+
+                    var text = validationState.message();
+                    koBindingsHelper.setTextContent(element, text);
                 };
 
                 applyForValidationState(functionToApply, element, valueAccessor, allBindingsAccessor, viewModel);
@@ -2001,7 +2045,8 @@ var valerie = {};
         koBindingHandlers.validationMessageText = isolatedBindingHandler(
             function (element, valueAccessor, allBindingsAccessor, viewModel) {
                 var functionToApply = function (validationState) {
-                    ko.utils.setTextContent(element, validationState.message());
+                    var text = validationState.message();
+                    koBindingsHelper.setTextContent(element, text);
                 };
 
                 applyForValidationState(functionToApply, element, valueAccessor, allBindingsAccessor, viewModel);
@@ -2100,38 +2145,6 @@ var valerie = {};
     })();
 })();
 
-(function () {
-    "use strict";
-
-    var
-        koCheckedBindingHandler = ko.bindingHandlers.checked,
-        koValueBindingHandler = ko.bindingHandlers.value;
-
-    /**
-     * Contains helper functions for working with valerie's Knockout binding handlers.
-     * @namespace
-     */
-    valerie.koBindingsHelper = {
-        /**
-         * Restores the original <b>checked</b> and <b>value</b> binding handlers.
-         * @name valerie.koBindingsHelper#useOriginalBindingHandlers
-         * @function
-         */
-        "useOriginalBindingHandlers": function () {
-            ko.bindingHandlers.checked = koCheckedBindingHandler;
-            ko.bindingHandlers.value = koValueBindingHandler;
-        },
-        /**
-         * Replaces the <b>checked</b> and <b>value</b> binding handlers with the validating equivalents.
-         * @name valerie.koBindingsHelper#useValidatingBindingHandlers
-         * @function
-         */
-        "useValidatingBindingHandlers": function () {
-            ko.bindingHandlers.checked = ko.bindingHandlers.validatedChecked;
-            ko.bindingHandlers.value = ko.bindingHandlers.validatedValue;
-        }
-    };
-})();
 (function () {
     "use strict";
 

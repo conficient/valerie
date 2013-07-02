@@ -192,6 +192,14 @@
      */
     valerie.koBindingsHelper = {
         /**
+         * Sets the textual content for the given element.
+         * @name valerie.koBindingsHelper#setInnerText
+         * @param {string} text the text to use
+         */
+        "setTextContent": function (element, text) {
+            ko.bindingHandlers.text.update(element, function () { return text; });
+        },
+        /**
          * Restores the original &lt;b>checked&lt;/b> and &lt;b>value&lt;/b> binding handlers.
          * @name valerie.koBindingsHelper#useOriginalBindingHandlers
          * @function
