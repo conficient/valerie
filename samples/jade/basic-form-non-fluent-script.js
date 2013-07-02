@@ -15,7 +15,9 @@ function RunSample() {
         viewModelValidationState = valerie.validatableModel(viewModel);
 
     viewModel.firstName.validate({
-        "type": "string",
+        // The passThrough converter is the default converter, set
+        // here to illustrate the non-fluent interface
+        "converter": valerie.converters.passThrough,
         "required": true,
         "rules": [
             new valerie.rules.StringLength(2, null)
