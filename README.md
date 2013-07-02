@@ -21,7 +21,7 @@ View the [Samples](https://rawgithub.com/egrove/valerie/master/samples/index.htm
 
 
 ##Dependencies##
-KnockoutJS. That's it.
+**KnockoutJS**. That's it.
 
 
 ##Distributions##
