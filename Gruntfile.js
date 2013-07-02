@@ -162,8 +162,7 @@ module.exports = function (grunt) {
 
     grunt.registerTask("build", [
         "concatAndHint",
-        "uglify",
-        "tests"
+        "uglify"
     ]);
 
     grunt.registerTask("concatAndHint", [
@@ -184,6 +183,7 @@ module.exports = function (grunt) {
     ]);
 
     grunt.registerTask("tests", [
+        "build",
         "jasmine"
     ]);
 
