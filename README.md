@@ -26,7 +26,7 @@ View the [Samples](https://rawgithub.com/egrove/valerie/master/samples/index.htm
 
 The [latest/code](latest/code) folder contains the latest distributions of the valerie library.
 
-The folder contains minified (`*min.js`) and non-minified (`*.js`) versions of each distribution.
+The folder contains minified (`*.min.js`) and non-minified (`*.js`) versions of each distribution.
 
 You'll only need to use **one** of the files in this folder in your project, typically you'll use
 one of:
