@@ -4,7 +4,7 @@
   <title><![CDATA[Category: code-sample | valerie]]></title>
   <link href="http://egrove.github.io/valerie/blog/categories/code-sample/atom.xml" rel="self"/>
   <link href="http://egrove.github.io/valerie/"/>
-  <updated>2013-07-06T15:01:02+01:00</updated>
+  <updated>2013-07-06T15:16:46+01:00</updated>
   <id>http://egrove.github.io/valerie/</id>
   <author>
     <name><![CDATA[egrove Ltd]]></name>
@@ -18,44 +18,9 @@
     <link href="http://egrove.github.io/valerie/blog/2013/07/05/code-sample/"/>
     <updated>2013-07-05T22:34:00+01:00</updated>
     <id>http://egrove.github.io/valerie/blog/2013/07/05/code-sample</id>
-    <content type="html"><![CDATA[<p>```javascript
-function RunSample() {</p>
+    <content type="html"><![CDATA[<p>This is a simple code sample.</p>
 
-<pre><code>var viewModel = valerie.validatableModel({
-    "firstName": ko.observable()
-        .validate()
-        .string()
-        .minimumLength(2)
-        .required()
-        .end(),
-    "surname": ko.observable()
-        .validate()
-        .string()
-        .minimumLength(2)
-        .required()
-        .end(),
-    "submit": function () {
-        viewModel.validation().touched(true);
-    },
-    "reset": function () {
-        viewModel.firstName("");
-        viewModel.surname("");
-        viewModel.validation().touched(false);
-    }
-})
-    .validateAll()
-    .end();
-
-ko.bindingHandlers.validationCss.classNames.failed = "error";
-ko.bindingHandlers.validationCss.classNames.passed = "success";
-
-ko.applyBindings(viewModel, document.getElementById("sample"));
-
-return viewModel;
-</code></pre>
-
-<p>}
-```</p>
+<p>It demonstrates <strong>valerie</strong> being used to validate a simple form.</p>
 
 <p>```html</p>
 
@@ -86,6 +51,45 @@ return viewModel;
         <button data-bind="click: reset" class="btn">Reset</button>
     </div>
 </div>
+
+
+
+
+<script type="text/javascript">
+    function RunSample() {
+        var viewModel = valerie.validatableModel({
+            "firstName": ko.observable()
+                .validate()
+                .string()
+                .minimumLength(2)
+                .required()
+                .end(),
+            "surname": ko.observable()
+                .validate()
+                .string()
+                .minimumLength(2)
+                .required()
+                .end(),
+            "submit": function () {
+                viewModel.validation().touched(true);
+            },
+            "reset": function () {
+                viewModel.firstName("");
+                viewModel.surname("");
+                viewModel.validation().touched(false);
+            }
+        })
+            .validateAll()
+            .end();
+
+        ko.bindingHandlers.validationCss.classNames.failed = "error";
+        ko.bindingHandlers.validationCss.classNames.passed = "success";
+
+        ko.applyBindings(viewModel, document.getElementById("sample"));
+
+        return viewModel;
+    }
+</script>
 
 
 <p>```</p>
