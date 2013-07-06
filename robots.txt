@@ -1,4 +1,4 @@
 User-agent: *
 Disallow: 
 
-Sitemap: http://valerie.egrove.co.uk/sitemap.xml 
+Sitemap: http://egrove.github.io//github/sitemap.xml 

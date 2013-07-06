@@ -1,19 +1,19 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
-        <loc>http://valerie.egrove.co.uk/blog/2013/07/05/code-sample/</loc>
+        <loc>http://egrove.github.io//github/blog/2013/07/05/code-sample/</loc>
         <lastmod>2013-07-06T15:14:25+01:00</lastmod>
     </url>
     <url>
-        <loc>http://valerie.egrove.co.uk/blog/archives/</loc>
+        <loc>http://egrove.github.io//github/blog/archives/</loc>
         <lastmod>2013-07-06T15:14:25+01:00</lastmod>
     </url>
     <url>
-        <loc>http://valerie.egrove.co.uk/</loc>
+        <loc>http://egrove.github.io//github/</loc>
         <lastmod>2013-07-06T15:14:25+01:00</lastmod>
     </url>
     <url>
-        <loc>http://valerie.egrove.co.uk/robots.txt</loc>
+        <loc>http://egrove.github.io//github/robots.txt</loc>
         <lastmod>2013-07-06T14:50:20+01:00</lastmod>
     </url>
 </urlset>
