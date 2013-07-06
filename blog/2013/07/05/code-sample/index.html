@@ -5,11 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Code Sample - valerie</title>
+  <title>Simple Form (fluent) w/ Bootstrap - valerie</title>
   <meta name="author" content="egrove Ltd">
 
   
-  <meta name="description" content="This is a simple code sample. It demonstrates valerie being used to validate a simple form. &lt;div id=&quot;sample&quot; class=&quot;form-horizontal &hellip;">
+  <meta name="description" content="This code sample demonstrates valerie being used to validate a simple form.
+Bootstrap is used to style the form. HTML &lt;div id=&quot;sample&quot; &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -29,6 +30,20 @@
   <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
 <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-21877949-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
 
 </head>
 
@@ -66,7 +81,7 @@
   
   <header>
     
-      <h1 class="entry-title">Code Sample</h1>
+      <h1 class="entry-title">Simple Form (fluent) w/ Bootstrap</h1>
     
     
       <p class="meta">
@@ -89,9 +104,10 @@
   </header>
 
 
-<div class="entry-content"><p>This is a simple code sample.</p>
+<div class="entry-content"><p>This code sample demonstrates <strong>valerie</strong> being used to validate a simple form.
+Bootstrap is used to style the form.</p>
 
-<p>It demonstrates <strong>valerie</strong> being used to validate a simple form.</p>
+<h2>HTML</h2>
 
 <div><script src='https://gist.github.com/10f486045f8d532d84fa.js?file=fiddle.html'></script>
 <noscript><pre><code>&lt;div id=&quot;sample&quot; class=&quot;form-horizontal&quot;&gt;
@@ -123,7 +139,7 @@
 &lt;/div&gt;</code></pre></noscript></div>
 
 
-
+<h2>Javascript</h2>
 
 <div><script src='https://gist.github.com/10f486045f8d532d84fa.js?file=fiddle.js'></script>
 <noscript><pre><code>var viewModel = valerie.validatableModel({
@@ -159,7 +175,13 @@ window.onload = function () {
 }</code></pre></noscript></div>
 
 
+<ul>
+<li>Lines <strong>26 &ndash; 27</strong> override the default class-names for when validation fails
+or passed</li>
+</ul>
 
+
+<h2>CSS</h2>
 
 <div><script src='https://gist.github.com/10f486045f8d532d84fa.js?file=fiddle.css'></script>
 <noscript><pre><code>.success .help-block {
@@ -179,6 +201,19 @@ window.onload = function () {
     display: none;
 }</code></pre></noscript></div>
 
+
+<ul>
+<li>Lines <strong>1 &ndash; 3</strong> hide Bootstrap help-blocks for model properties where
+validation has been successful</li>
+<li>Lines <strong>5 &ndash; 12</strong> override the colour and border colour of form elements,
+<em>neutralising</em> them if their model properties haven&rsquo;t been <em>touched</em></li>
+<li>Lines <strong>14 &ndash; 16</strong> hide Bootstrap help-blocks for model properties which
+haven&rsquo;t been <em>touched</em></li>
+</ul>
+
+
+<p>The sample can seen running
+<a href="http://jsfiddle.net/gh/gist/knockout/2.2.1/10f486045f8d532d84fa/" title="Simple Form /w Bootstrap">here</a> ⇗.</p>
 </div>
 
 
@@ -206,7 +241,7 @@ window.onload = function () {
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/code-sample/'>code-sample</a>
+    <a class='category' href='/blog/categories/bootstrap/'>bootstrap</a>, <a class='category' href='/blog/categories/code-sample/'>code-sample</a>
   
 </span>
 
@@ -242,7 +277,7 @@ window.onload = function () {
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/2013/07/05/code-sample/">Code Sample</a>
+        <a href="/blog/2013/07/05/code-sample/">Simple Form (fluent) w/ Bootstrap</a>
       </li>
     
   </ul>
@@ -301,18 +336,6 @@ window.onload = function () {
 
 
 
-
-  <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-21877949-2']);
-    _gaq.push(['_trackPageview']);
-
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-  </script>
 
 
 </body>
