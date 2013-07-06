@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[valerie]]></title>
-  <link href="http://egrove.github.io//github/atom.xml" rel="self"/>
-  <link href="http://egrove.github.io//github/"/>
-  <updated>2013-07-06T16:28:04+01:00</updated>
-  <id>http://egrove.github.io//github/</id>
+  <link href="http://valerie.egrove.co.uk/atom.xml" rel="self"/>
+  <link href="http://valerie.egrove.co.uk/"/>
+  <updated>2013-07-06T16:48:36+01:00</updated>
+  <id>http://valerie.egrove.co.uk/</id>
   <author>
     <name><![CDATA[egrove Ltd]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Code Sample]]></title>
-    <link href="http://egrove.github.io//github/blog/2013/07/05/code-sample/"/>
+    <link href="http://valerie.egrove.co.uk/blog/2013/07/05/code-sample/"/>
     <updated>2013-07-05T22:34:00+01:00</updated>
-    <id>http://egrove.github.io//github/blog/2013/07/05/code-sample</id>
+    <id>http://valerie.egrove.co.uk/blog/2013/07/05/code-sample</id>
     <content type="html"><![CDATA[<p>This is a simple code sample.</p>
 
 <p>It demonstrates <strong>valerie</strong> being used to validate a simple form.</p>
