@@ -9,28 +9,7 @@
   <meta name="author" content="egrove Ltd">
 
   
-  <meta name="description" content="This is a simple code sample. It demonstrates valerie being used to validate a simple form. 1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22 &hellip;">
+  <meta name="description" content="This is a simple code sample. It demonstrates valerie being used to validate a simple form. &lt;div id=&quot;sample&quot; class=&quot;form-horizontal &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -114,133 +93,91 @@
 
 <p>It demonstrates <strong>valerie</strong> being used to validate a simple form.</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-<span class='line-number'>48</span>
-<span class='line-number'>49</span>
-<span class='line-number'>50</span>
-<span class='line-number'>51</span>
-<span class='line-number'>52</span>
-<span class='line-number'>53</span>
-<span class='line-number'>54</span>
-<span class='line-number'>55</span>
-<span class='line-number'>56</span>
-<span class='line-number'>57</span>
-<span class='line-number'>58</span>
-<span class='line-number'>59</span>
-<span class='line-number'>60</span>
-<span class='line-number'>61</span>
-<span class='line-number'>62</span>
-<span class='line-number'>63</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;form-horizontal sample&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;fieldset&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;legend&gt;</span>Your Name<span class="nt">&lt;/legend&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;div</span> <span class="na">data-bind=</span><span class="s">&quot;validationCss: firstName&quot;</span> <span class="na">class=</span><span class="s">&quot;control-group&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;firstName&quot;</span> <span class="na">class=</span><span class="s">&quot;control-label&quot;</span><span class="nt">&gt;</span>First Name<span class="nt">&lt;/label&gt;</span>
-</span><span class='line'>
-</span><span class='line'>            <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;controls&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>                <span class="nt">&lt;input</span> <span class="na">id=</span><span class="s">&quot;firstName&quot;</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">data-bind=</span><span class="s">&quot;validatedValue: firstName&quot;</span><span class="nt">/&gt;</span>
-</span><span class='line'>
-</span><span class='line'>                <span class="nt">&lt;div</span> <span class="na">data-bind=</span><span class="s">&quot;validationMessageText: firstName&quot;</span> <span class="na">class=</span><span class="s">&quot;help-block&quot;</span><span class="nt">&gt;&lt;/div&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;/div&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;/div&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;div</span> <span class="na">data-bind=</span><span class="s">&quot;validationCss: surname&quot;</span> <span class="na">class=</span><span class="s">&quot;control-group&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;surname&quot;</span> <span class="na">class=</span><span class="s">&quot;control-label&quot;</span><span class="nt">&gt;</span>Surname<span class="nt">&lt;/label&gt;</span>
-</span><span class='line'>
-</span><span class='line'>            <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;controls&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>                <span class="nt">&lt;input</span> <span class="na">id=</span><span class="s">&quot;surname&quot;</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">data-bind=</span><span class="s">&quot;validatedValue: surname&quot;</span><span class="nt">/&gt;</span>
-</span><span class='line'>
-</span><span class='line'>                <span class="nt">&lt;div</span> <span class="na">data-bind=</span><span class="s">&quot;validationMessageText: surname&quot;</span> <span class="na">class=</span><span class="s">&quot;help-block&quot;</span><span class="nt">&gt;&lt;/div&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;/div&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;/div&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;/fieldset&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;form-actions&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;button</span> <span class="na">data-bind=</span><span class="s">&quot;click: submit&quot;</span> <span class="na">class=</span><span class="s">&quot;btn btn-primary&quot;</span><span class="nt">&gt;</span>Submit<span class="nt">&lt;/button&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;button</span> <span class="na">data-bind=</span><span class="s">&quot;click: reset&quot;</span> <span class="na">class=</span><span class="s">&quot;btn&quot;</span><span class="nt">&gt;</span>Reset<span class="nt">&lt;/button&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;/div&gt;</span>
-</span><span class='line'><span class="nt">&lt;/div&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>    <span class="kd">function</span> <span class="nx">RunSample</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>        <span class="kd">var</span> <span class="nx">viewModel</span> <span class="o">=</span> <span class="nx">valerie</span><span class="p">.</span><span class="nx">validatableModel</span><span class="p">({</span>
-</span><span class='line'>            <span class="s2">&quot;firstName&quot;</span><span class="o">:</span> <span class="nx">ko</span><span class="p">.</span><span class="nx">observable</span><span class="p">()</span>
-</span><span class='line'>                <span class="p">.</span><span class="nx">validate</span><span class="p">()</span>
-</span><span class='line'>                <span class="p">.</span><span class="nx">string</span><span class="p">()</span>
-</span><span class='line'>                <span class="p">.</span><span class="nx">minimumLength</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</span><span class='line'>                <span class="p">.</span><span class="nx">required</span><span class="p">()</span>
-</span><span class='line'>                <span class="p">.</span><span class="nx">end</span><span class="p">(),</span>
-</span><span class='line'>            <span class="s2">&quot;surname&quot;</span><span class="o">:</span> <span class="nx">ko</span><span class="p">.</span><span class="nx">observable</span><span class="p">()</span>
-</span><span class='line'>                <span class="p">.</span><span class="nx">validate</span><span class="p">()</span>
-</span><span class='line'>                <span class="p">.</span><span class="nx">string</span><span class="p">()</span>
-</span><span class='line'>                <span class="p">.</span><span class="nx">minimumLength</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</span><span class='line'>                <span class="p">.</span><span class="nx">required</span><span class="p">()</span>
-</span><span class='line'>                <span class="p">.</span><span class="nx">end</span><span class="p">(),</span>
-</span><span class='line'>            <span class="s2">&quot;submit&quot;</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>                <span class="nx">viewModel</span><span class="p">.</span><span class="nx">validation</span><span class="p">().</span><span class="nx">touched</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
-</span><span class='line'>            <span class="p">},</span>
-</span><span class='line'>            <span class="s2">&quot;reset&quot;</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>                <span class="nx">viewModel</span><span class="p">.</span><span class="nx">firstName</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">);</span>
-</span><span class='line'>                <span class="nx">viewModel</span><span class="p">.</span><span class="nx">surname</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">);</span>
-</span><span class='line'>                <span class="nx">viewModel</span><span class="p">.</span><span class="nx">validation</span><span class="p">().</span><span class="nx">touched</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
-</span><span class='line'>            <span class="p">}</span>
-</span><span class='line'>        <span class="p">})</span>
-</span><span class='line'>            <span class="p">.</span><span class="nx">validateAll</span><span class="p">()</span>
-</span><span class='line'>            <span class="p">.</span><span class="nx">end</span><span class="p">();</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="nx">ko</span><span class="p">.</span><span class="nx">bindingHandlers</span><span class="p">.</span><span class="nx">validationCss</span><span class="p">.</span><span class="nx">classNames</span><span class="p">.</span><span class="nx">failed</span> <span class="o">=</span> <span class="s2">&quot;error&quot;</span><span class="p">;</span>
-</span><span class='line'>        <span class="nx">ko</span><span class="p">.</span><span class="nx">bindingHandlers</span><span class="p">.</span><span class="nx">validationCss</span><span class="p">.</span><span class="nx">classNames</span><span class="p">.</span><span class="nx">passed</span> <span class="o">=</span> <span class="s2">&quot;success&quot;</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="nx">ko</span><span class="p">.</span><span class="nx">applyBindings</span><span class="p">(</span><span class="nx">viewModel</span><span class="p">,</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&quot;sample&quot;</span><span class="p">));</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="k">return</span> <span class="nx">viewModel</span><span class="p">;</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'><span class="nt">&lt;/script&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<div><script src='https://gist.github.com/10f486045f8d532d84fa.js?file=fiddle.html'></script>
+<noscript><pre><code>&lt;div id=&quot;sample&quot; class=&quot;form-horizontal&quot;&gt;
+    &lt;fieldset&gt;
+        &lt;legend&gt;Your Name&lt;/legend&gt;
+        &lt;div data-bind=&quot;validationCss: firstName&quot; class=&quot;control-group&quot;&gt;
+            &lt;label for=&quot;firstName&quot; class=&quot;control-label&quot;&gt;First Name&lt;/label&gt;
+
+            &lt;div class=&quot;controls&quot;&gt;
+                &lt;input id=&quot;firstName&quot; type=&quot;text&quot; data-bind=&quot;validatedValue: firstName&quot;/&gt;
+
+                &lt;div data-bind=&quot;validationMessageText: firstName&quot; class=&quot;help-block&quot;&gt;&lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div data-bind=&quot;validationCss: surname&quot; class=&quot;control-group&quot;&gt;
+            &lt;label for=&quot;surname&quot; class=&quot;control-label&quot;&gt;Surname&lt;/label&gt;
+
+            &lt;div class=&quot;controls&quot;&gt;
+                &lt;input id=&quot;surname&quot; type=&quot;text&quot; data-bind=&quot;validatedValue: surname&quot;/&gt;
+
+                &lt;div data-bind=&quot;validationMessageText: surname&quot; class=&quot;help-block&quot;&gt;&lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/fieldset&gt;
+    &lt;div class=&quot;form-actions&quot;&gt;
+        &lt;button data-bind=&quot;click: submit&quot; class=&quot;btn btn-primary&quot;&gt;Submit&lt;/button&gt;
+        &lt;button data-bind=&quot;click: reset&quot; class=&quot;btn&quot;&gt;Reset&lt;/button&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre></noscript></div>
+
+
+
+
+<div><script src='https://gist.github.com/10f486045f8d532d84fa.js?file=fiddle.js'></script>
+<noscript><pre><code>var viewModel = valerie.validatableModel({
+    &quot;firstName&quot;: ko.observable()
+            .validate()
+            .string()
+            .minimumLength(2)
+            .required()
+            .end(),
+    &quot;surname&quot;: ko.observable()
+            .validate()
+            .string()
+            .minimumLength(2)
+            .required()
+            .end(),
+    &quot;submit&quot;: function () {
+        viewModel.validation().touched(true);
+    },
+    &quot;reset&quot;: function () {
+        viewModel.firstName(&quot;&quot;);
+        viewModel.surname(&quot;&quot;);
+        viewModel.validation().touched(false);
+    }
+})
+        .validateAll()
+        .end();
+
+ko.bindingHandlers.validationCss.classNames.failed = &quot;error&quot;;
+ko.bindingHandlers.validationCss.classNames.passed = &quot;success&quot;;
+
+window.onload = function () {
+    ko.applyBindings(viewModel, document.getElementById(&quot;sample&quot;));
+}</code></pre></noscript></div>
+
+
+
+
+<div><script src='https://gist.github.com/10f486045f8d532d84fa.js?file=fiddle.css'></script>
+<noscript><pre><code>.success .help-block {
+    display: none;
+}
+
+.untouched,
+.untouched input,
+.untouched label,
+.untouched select,
+.untouched textarea {
+    color: #333333 !important;
+    border-color: #cccccc !important;
+}
+
+.untouched .help-block {
+    display: none;
+}</code></pre></noscript></div>
 
 </div>
 

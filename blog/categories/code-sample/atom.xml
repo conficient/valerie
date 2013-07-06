@@ -4,7 +4,7 @@
   <title><![CDATA[Category: code-sample | valerie]]></title>
   <link href="http://valerie.egrove.co.uk/blog/categories/code-sample/atom.xml" rel="self"/>
   <link href="http://valerie.egrove.co.uk/"/>
-  <updated>2013-07-06T16:48:36+01:00</updated>
+  <updated>2013-07-06T20:05:19+01:00</updated>
   <id>http://valerie.egrove.co.uk/</id>
   <author>
     <name><![CDATA[egrove Ltd]]></name>
@@ -22,77 +22,86 @@
 
 <p>It demonstrates <strong>valerie</strong> being used to validate a simple form.</p>
 
-<p>```html</p>
+<p><div><script src='https://gist.github.com/10f486045f8d532d84fa.js?file=fiddle.html'></script>
+<noscript><pre><code>&lt;div id=&quot;sample&quot; class=&quot;form-horizontal&quot;&gt;
+    &lt;fieldset&gt;
+        &lt;legend&gt;Your Name&lt;/legend&gt;
+        &lt;div data-bind=&quot;validationCss: firstName&quot; class=&quot;control-group&quot;&gt;
+            &lt;label for=&quot;firstName&quot; class=&quot;control-label&quot;&gt;First Name&lt;/label&gt;
 
-<div class="form-horizontal sample">
-    <fieldset>
-        <legend>Your Name</legend>
-        <div data-bind="validationCss: firstName" class="control-group">
-            <label for="firstName" class="control-label">First Name</label>
+            &lt;div class=&quot;controls&quot;&gt;
+                &lt;input id=&quot;firstName&quot; type=&quot;text&quot; data-bind=&quot;validatedValue: firstName&quot;/&gt;
 
-            <div class="controls">
-                <input id="firstName" type="text" data-bind="validatedValue: firstName"/>
+                &lt;div data-bind=&quot;validationMessageText: firstName&quot; class=&quot;help-block&quot;&gt;&lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div data-bind=&quot;validationCss: surname&quot; class=&quot;control-group&quot;&gt;
+            &lt;label for=&quot;surname&quot; class=&quot;control-label&quot;&gt;Surname&lt;/label&gt;
 
-                <div data-bind="validationMessageText: firstName" class="help-block"></div>
-            </div>
-        </div>
-        <div data-bind="validationCss: surname" class="control-group">
-            <label for="surname" class="control-label">Surname</label>
+            &lt;div class=&quot;controls&quot;&gt;
+                &lt;input id=&quot;surname&quot; type=&quot;text&quot; data-bind=&quot;validatedValue: surname&quot;/&gt;
 
-            <div class="controls">
-                <input id="surname" type="text" data-bind="validatedValue: surname"/>
+                &lt;div data-bind=&quot;validationMessageText: surname&quot; class=&quot;help-block&quot;&gt;&lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/fieldset&gt;
+    &lt;div class=&quot;form-actions&quot;&gt;
+        &lt;button data-bind=&quot;click: submit&quot; class=&quot;btn btn-primary&quot;&gt;Submit&lt;/button&gt;
+        &lt;button data-bind=&quot;click: reset&quot; class=&quot;btn&quot;&gt;Reset&lt;/button&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre></noscript></div>
 
-                <div data-bind="validationMessageText: surname" class="help-block"></div>
-            </div>
-        </div>
-    </fieldset>
-    <div class="form-actions">
-        <button data-bind="click: submit" class="btn btn-primary">Submit</button>
-        <button data-bind="click: reset" class="btn">Reset</button>
-    </div>
-</div>
-
-
-
-
-<script type="text/javascript">
-    function RunSample() {
-        var viewModel = valerie.validatableModel({
-            "firstName": ko.observable()
-                .validate()
-                .string()
-                .minimumLength(2)
-                .required()
-                .end(),
-            "surname": ko.observable()
-                .validate()
-                .string()
-                .minimumLength(2)
-                .required()
-                .end(),
-            "submit": function () {
-                viewModel.validation().touched(true);
-            },
-            "reset": function () {
-                viewModel.firstName("");
-                viewModel.surname("");
-                viewModel.validation().touched(false);
-            }
-        })
-            .validateAll()
-            .end();
-
-        ko.bindingHandlers.validationCss.classNames.failed = "error";
-        ko.bindingHandlers.validationCss.classNames.passed = "success";
-
-        ko.applyBindings(viewModel, document.getElementById("sample"));
-
-        return viewModel;
+<div><script src='https://gist.github.com/10f486045f8d532d84fa.js?file=fiddle.js'></script>
+<noscript><pre><code>var viewModel = valerie.validatableModel({
+    &quot;firstName&quot;: ko.observable()
+            .validate()
+            .string()
+            .minimumLength(2)
+            .required()
+            .end(),
+    &quot;surname&quot;: ko.observable()
+            .validate()
+            .string()
+            .minimumLength(2)
+            .required()
+            .end(),
+    &quot;submit&quot;: function () {
+        viewModel.validation().touched(true);
+    },
+    &quot;reset&quot;: function () {
+        viewModel.firstName(&quot;&quot;);
+        viewModel.surname(&quot;&quot;);
+        viewModel.validation().touched(false);
     }
-</script>
+})
+        .validateAll()
+        .end();
 
+ko.bindingHandlers.validationCss.classNames.failed = &quot;error&quot;;
+ko.bindingHandlers.validationCss.classNames.passed = &quot;success&quot;;
 
-<p>```</p>
+window.onload = function () {
+    ko.applyBindings(viewModel, document.getElementById(&quot;sample&quot;));
+}</code></pre></noscript></div>
+
+<div><script src='https://gist.github.com/10f486045f8d532d84fa.js?file=fiddle.css'></script>
+<noscript><pre><code>.success .help-block {
+    display: none;
+}
+
+.untouched,
+.untouched input,
+.untouched label,
+.untouched select,
+.untouched textarea {
+    color: #333333 !important;
+    border-color: #cccccc !important;
+}
+
+.untouched .help-block {
+    display: none;
+}</code></pre></noscript></div>
+</p>
 ]]></content>
   </entry>
   
