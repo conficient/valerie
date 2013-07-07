@@ -4,6 +4,8 @@
 
 .grunt
 _SpecRunner.html
+apidocs
+apiDocs.zip
 build
 
 

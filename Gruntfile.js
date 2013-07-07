@@ -2,24 +2,23 @@ module.exports = function (grunt) {
     grunt.initConfig({
         "pkg": grunt.file.readJSON("package.json"),
         "clean": {
+            "apidocs": [
+                "apiDocs"
+            ],
             "build": [
                 "build"
-            ],
-            "updateLatest": [
-                "latest/apidocs",
-                "latest/code"
-            ]            
+            ]
         },
-        "copy": {
-            "samples": {
-            },
-            "updateLatest": {
+        "compress": {
+            "apiDocs": {
+                "options": {
+                    "archive": "apiDocs.zip",
+                    "mode": "zip"
+                },
                 "files": [
                     {
-                        "expand": true,
-                        "cwd": "build",
-                        "src": ["valerie*.js"],
-                        "dest": "latest/code"
+                        "src": ["apiDocs/**"],
+                        "dest": "/"
                     }
                 ]
             }
@@ -80,22 +79,6 @@ module.exports = function (grunt) {
                 "dest": "build/valerie-en-us.js"
             }
         },
-        "jade": {
-            "samples": {
-                "options": {
-                    "pretty": true
-                },
-                "files": [
-                    {
-                        "cwd": "samples/jade",
-                        "expand": true,
-                        "src": ["*.jade"],
-                        "dest": "samples",
-                        "ext": ".html"
-                    }
-                ]
-            }
-        },
         "jasmine": {
             "build": {
                 "src": "build/valerie-en-gb.js",
@@ -123,7 +106,7 @@ module.exports = function (grunt) {
             }
         },
         "shell": {
-            "updateLatest": {
+            "apidocs": {
                 "command": "jsdoc -c jsdoc.conf.json -t ../docstrap/template",
                 "stdout": true,
                 "stderr": true
@@ -148,11 +131,10 @@ module.exports = function (grunt) {
     });
 
     grunt.loadNpmTasks("grunt-contrib-clean");
+    grunt.loadNpmTasks("grunt-contrib-compress");
     grunt.loadNpmTasks("grunt-contrib-concat");
-    grunt.loadNpmTasks('grunt-contrib-jade');
     grunt.loadNpmTasks('grunt-contrib-jasmine');
     grunt.loadNpmTasks('grunt-contrib-jshint');
-    grunt.loadNpmTasks("grunt-contrib-copy");
     grunt.loadNpmTasks("grunt-contrib-uglify");
     grunt.loadNpmTasks("grunt-shell");
 
@@ -175,21 +157,14 @@ module.exports = function (grunt) {
         "jshint"
     ]);
 
-    grunt.registerTask("samples", [
-        "concatAndHint",
-        "uglify",
-        "copy:samples",
-        "jade:samples"
-    ]);
-
     grunt.registerTask("tests", [
         "build",
         "jasmine"
     ]);
 
-    grunt.registerTask("updateLatest", [
-        "clean:updateLatest",
-        "copy:updateLatest",
-        "shell:updateLatest"
+    grunt.registerTask("apidocs", [
+        "clean:apidocs",
+        "shell:apidocs",
+        "compress:apidocs"
     ]);
 };
