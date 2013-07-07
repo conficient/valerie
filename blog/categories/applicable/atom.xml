@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: applicable | valerie]]></title>
+  <title><![CDATA[Category: applicable | valerie, a KnockoutJS validation library.]]></title>
   <link href="http://valerie.egrove.co.uk/blog/categories/applicable/atom.xml" rel="self"/>
   <link href="http://valerie.egrove.co.uk/"/>
-  <updated>2013-07-07T16:15:31+01:00</updated>
+  <updated>2013-07-07T16:37:53+01:00</updated>
   <id>http://valerie.egrove.co.uk/</id>
   <author>
     <name><![CDATA[egrove Ltd]]></name>
