@@ -4,7 +4,7 @@
   <title><![CDATA[valerie]]></title>
   <link href="http://valerie.egrove.co.uk/atom.xml" rel="self"/>
   <link href="http://valerie.egrove.co.uk/"/>
-  <updated>2013-07-07T13:34:48+01:00</updated>
+  <updated>2013-07-07T14:34:32+01:00</updated>
   <id>http://valerie.egrove.co.uk/</id>
   <author>
     <name><![CDATA[egrove Ltd]]></name>
@@ -12,6 +12,426 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Contact List Form (fluent) w/ Bootstrap]]></title>
+    <link href="http://valerie.egrove.co.uk/blog/2013/07/07/contact-list-form-with-bootstrap/"/>
+    <updated>2013-07-07T14:29:00+01:00</updated>
+    <id>http://valerie.egrove.co.uk/blog/2013/07/07/contact-list-form-with-bootstrap</id>
+    <content type="html"><![CDATA[<p>This code sample demonstrates <strong>valerie</strong> being used to validate a
+contact-list form.</p>
+
+<p>Bootstrap is used to style the form.</p>
+
+<!-- more -->
+
+
+<h2>HTML</h2>
+
+<div><script src='https://gist.github.com/2a227220a8c2d80328ba.js?file=fiddle.html'></script>
+<noscript><pre><code>&lt;div id=&quot;sample&quot; class=&quot;form-horizontal&quot;&gt;
+    &lt;fieldset&gt;
+        &lt;legend&gt;List Details&lt;/legend&gt;
+        &lt;div data-bind=&quot;validationCss: listName&quot; class=&quot;control-group&quot;&gt;
+            &lt;label for=&quot;listName&quot; class=&quot;control-label&quot;&gt;Name&lt;/label&gt;
+
+            &lt;div class=&quot;controls&quot;&gt;
+                &lt;input id=&quot;listName&quot; type=&quot;text&quot; data-bind=&quot;value: listName&quot;/&gt;
+
+                &lt;div data-bind=&quot;validationMessageText: listName&quot; class=&quot;help-block&quot;&gt;&lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/fieldset&gt;
+
+    &lt;fieldset&gt;
+        &lt;legend&gt;Contacts&lt;/legend&gt;
+        &lt;table width=&quot;100%&quot;&gt;
+            &lt;thead&gt;
+            &lt;tr&gt;
+                &lt;th width=&quot;30%&quot;&gt;First Name&lt;/th&gt;
+                &lt;th width=&quot;30%&quot;&gt;Surname&lt;/th&gt;
+                &lt;th width=&quot;30%&quot;&gt;Number&lt;/th&gt;
+                &lt;th width=&quot;10%&quot;&gt;&lt;/th&gt;
+            &lt;/tr&gt;
+            &lt;/thead&gt;
+            &lt;tbody data-bind=&quot;foreach: contacts&quot;&gt;
+            &lt;tr&gt;
+                &lt;td data-bind=&quot;validationCss: firstName&quot; class=&quot;control-group&quot;&gt;
+                    &lt;input type=&quot;text&quot; data-bind=&quot;value: firstName&quot; class=&quot;input-medium&quot;/&gt;
+                &lt;/td&gt;
+                &lt;td data-bind=&quot;validationCss: surname&quot; class=&quot;control-group&quot;&gt;
+                    &lt;input type=&quot;text&quot; data-bind=&quot;value: surname&quot; class=&quot;input-medium&quot;/&gt;
+                &lt;/td&gt;
+                &lt;td data-bind=&quot;validationCss: number&quot; class=&quot;control-group&quot;&gt;
+                    &lt;input type=&quot;text&quot; data-bind=&quot;value: number&quot; class=&quot;input-medium&quot;/&gt;
+                &lt;/td&gt;
+                &lt;td&gt;
+                    &lt;button data-bind=&quot;click: $root.removeContact&quot; class=&quot;btn btn-danger&quot;&gt;Delete&lt;/button&gt;
+                &lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr data-bind=&quot;visibleWhenSummaryNotEmpty: true&quot;&gt;
+                &lt;td colspan=&quot;4&quot;&gt;
+                    &lt;ul data-bind=&quot;foreach: validation().summary()&quot; class=&quot;alert alert-error&quot;&gt;
+                        &lt;li&gt;&lt;span data-bind=&quot;text: name&quot;&gt;&lt;/span&gt;: &lt;span data-bind=&quot;text: message&quot;&gt;&lt;/span&gt;&lt;/li&gt;
+                    &lt;/ul&gt;
+                &lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;/tbody&gt;
+        &lt;/table&gt;
+
+        &lt;div class=&quot;clearfix&quot;&gt;
+            &lt;button data-bind=&quot;click: addContact&quot; class=&quot;btn btn-success btn-block&quot;&gt;Add Contact&lt;/button&gt;
+        &lt;/div&gt;
+    &lt;/fieldset&gt;
+
+    &lt;ul data-bind=&quot;foreach: validation().summary(), visibleWhenSummaryNotEmpty: true&quot; class=&quot;alert alert-error&quot;&gt;
+        &lt;li&gt;&lt;span data-bind=&quot;text: name&quot;&gt;&lt;/span&gt;: &lt;span data-bind=&quot;text: message&quot;&gt;&lt;/span&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+
+    &lt;div class=&quot;form-actions&quot;&gt;
+        &lt;button data-bind=&quot;click: submit&quot; class=&quot;btn btn-primary&quot;&gt;Submit&lt;/button&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre></noscript></div>
+
+
+<h2>Javascript</h2>
+
+<div><script src='https://gist.github.com/2a227220a8c2d80328ba.js?file=fiddle.js'></script>
+<noscript><pre><code>function Contact() {
+    return valerie.validatableModel({
+        &quot;firstName&quot;: ko.observable()
+            .validate()
+            .string()
+            .name(&quot;First Name&quot;)
+            .required()
+            .end(),
+        &quot;surname&quot;: ko.observable()
+            .validate()
+            .string()
+            .name(&quot;Surname&quot;)
+            .end(),
+        &quot;number&quot;: ko.observable()
+            .validate()
+            .name(&quot;Number&quot;)
+            .required()
+            .expression(/^\d{11}$/)
+            .ruleMessage(&quot;11 digits required.&quot;)
+            .end()
+    })
+        .name(&quot;Contact&quot;)
+        .validateChildProperties()
+        .end();
+}
+
+function ViewModel() {
+    var contacts = ko.observableArray()
+            .validateAsModel()
+            .name(&quot;Contacts&quot;)
+            .end(),
+        contactsPropertyValidationState = contacts.propertyValidationState()
+            .name(&quot;Contacts&quot;)
+            .numberOfItems(2, 5)
+            .ruleMessage(&quot;At least two contacts are required. Up to 5 can be added.&quot;),
+        self = valerie.validatableModel({
+            &quot;listName&quot;: ko.observable()
+                .validate()
+                .string()
+                .name(&quot;List Name&quot;)
+                .required()
+                .minimumLength(5)
+                .end(),
+            &quot;contacts&quot;: contacts,
+            &quot;addContact&quot;: function () {
+                var contact = new Contact();
+                contacts.validation().startValidatingSubModel(contact);
+                contacts.push(contact);
+            },
+            &quot;removeContact&quot;: function (contact) {
+                contacts.validation().stopValidatingSubModel(contact);
+                contacts.remove(contact);
+            },
+            &quot;submit&quot;: function () {
+                self.validation().touched(true);
+                self.validation().updateSummary(true);
+            },
+            &quot;reset&quot;: function () {
+                self.validation().touched(false);
+                self.validation().clearSummary(true);
+            }
+        })
+            .validateChildPropertiesAndSubModels()
+            .addValidationStates(contactsPropertyValidationState)
+            .end();
+
+    return self;
+}
+
+var viewModel = new ViewModel();
+
+ko.bindingHandlers.validationCss.classNames.failed = &quot;error&quot;;
+ko.bindingHandlers.validationCss.classNames.passed = &quot;success&quot;;
+
+valerie.koBindingsHelper.useValidatingBindingHandlers();
+
+window.onload = function () {
+    ko.applyBindings(viewModel, document.getElementById(&quot;sample&quot;));
+};</code></pre></noscript></div>
+
+
+<h2>CSS</h2>
+
+<div><script src='https://gist.github.com/2a227220a8c2d80328ba.js?file=fiddle.css'></script>
+<noscript><pre><code>.help-block {
+    margin-top: 0 !important;
+}
+
+.success .help-block {
+    display: none;
+}
+
+/* Forms */
+form {
+    margin: 0;
+}
+
+input,
+select,
+textarea {
+    border: 1px #cccccc solid;
+}
+
+.untouched,
+.untouched input,
+.untouched label,
+.untouched select,
+.untouched textarea {
+    color: #333333 !important;
+    border-color: #cccccc !important;
+}
+
+.untouched .help-block {
+    display: none;
+}
+
+ul.alert {
+    margin: 0.5em 0 0.5em 0;
+}
+
+ul.alert li {
+    list-style: none;
+}
+
+th {
+    text-align: left;
+}</code></pre></noscript></div>
+
+
+<p>This sample can be seen running
+<a href="http://jsfiddle.net/gh/gist/knockout/2.2.1/2a227220a8c2d80328ba/" title="Contact List Form /w Bootstrap">here</a> ⇗.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Order Form with Optionally Applicable Section (fluent) w/ Bootstrap]]></title>
+    <link href="http://valerie.egrove.co.uk/blog/2013/07/07/order-form-applicable-section-with-bootstrap/"/>
+    <updated>2013-07-07T14:09:00+01:00</updated>
+    <id>http://valerie.egrove.co.uk/blog/2013/07/07/order-form-applicable-section-with-bootstrap</id>
+    <content type="html"><![CDATA[<p>This code sample demonstrates <strong>valerie</strong> being used to validate an order form.</p>
+
+<p>The <em>Shipping Address</em> section becomes inapplicable if the user checks the box
+to use the billing address as the shipping address.</p>
+
+<p>The <em>Submit</em> button has an indicator showing whether the current state of the
+form is valid.</p>
+
+<p>Bootstrap is used to style the form.</p>
+
+<!-- more -->
+
+
+<h2>HTML</h2>
+
+<div><script src='https://gist.github.com/8b27a6ec3bc32c0f741d.js?file=fiddle.html'></script>
+<noscript><pre><code>&lt;div id=&quot;sample&quot; class=&quot;form-horizontal&quot;&gt;
+    &lt;fieldset&gt;
+        &lt;legend&gt;Order Details&lt;/legend&gt;
+        &lt;fieldset&gt;
+            &lt;label class=&quot;checkbox&quot;&gt;
+                &lt;input name=&quot;shipToBillingAddress&quot; type=&quot;checkbox&quot; data-bind=&quot;checked: shipToBillingAddress&quot;/&gt;
+                Ship to Billing Address
+            &lt;/label&gt;
+        &lt;/fieldset&gt;
+        &lt;fieldset&gt;
+            &lt;legend&gt;Billing Address&lt;/legend&gt;
+            &lt;!-- ko template: { name: 'address-template', data: billingAddress } --&gt;&lt;!-- /ko --&gt;
+            &lt;!-- ko template: { name: 'summary-template', data: billingAddress } --&gt;&lt;!-- /ko --&gt;
+        &lt;/fieldset&gt;
+        &lt;fieldset data-bind=&quot;visibleWhenApplicable: shippingAddress&quot;&gt;
+            &lt;legend&gt;Shipping Address&lt;/legend&gt;
+            &lt;!-- ko template: { name: 'address-template', data: shippingAddress } --&gt;&lt;!-- /ko --&gt;
+            &lt;!-- ko template: { name: 'summary-template', data: shippingAddress } --&gt;&lt;!-- /ko --&gt;
+        &lt;/fieldset&gt;
+    &lt;/fieldset&gt;
+
+    &lt;div class=&quot;form-actions&quot;&gt;
+        &lt;button data-bind=&quot;click: submit&quot; class=&quot;btn btn-primary&quot;&gt;
+            &lt;span data-bind=&quot;validationCss: true&quot;&gt;&lt;/span&gt;
+            Submit
+        &lt;/button&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Templates --&gt;
+&lt;div style=&quot;display: none&quot;&gt;
+    &lt;div id=&quot;summary-template&quot;&gt;
+        &lt;ul data-bind=&quot;foreach: validation().summary(), visibleWhenSummaryNotEmpty: true&quot; class=&quot;alert alert-error&quot;&gt;
+            &lt;li&gt;&lt;span data-bind=&quot;text: name&quot;&gt;&lt;/span&gt;: &lt;span data-bind=&quot;text: message&quot;&gt;&lt;/span&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/div&gt;
+
+    &lt;div id=&quot;address-template&quot;&gt;
+        &lt;div data-bind=&quot;validationCss: street&quot; class=&quot;control-group&quot;&gt;
+            &lt;label for=&quot;street&quot; class=&quot;control-label&quot;&gt;Street&lt;/label&gt;
+
+            &lt;div class=&quot;controls&quot;&gt;
+                &lt;input id=&quot;street&quot; type=&quot;text&quot; data-bind=&quot;value: street&quot;/&gt;
+
+                &lt;div data-bind=&quot;validationMessageText: street&quot; class=&quot;help-block&quot;&gt;&lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div data-bind=&quot;validationCss: town&quot; class=&quot;control-group&quot;&gt;
+            &lt;label for=&quot;town&quot; class=&quot;control-label&quot;&gt;Town&lt;/label&gt;
+
+            &lt;div class=&quot;controls&quot;&gt;
+                &lt;input id=&quot;town&quot; type=&quot;text&quot; data-bind=&quot;value: town&quot;/&gt;
+
+                &lt;div data-bind=&quot;validationMessageText: town&quot; class=&quot;help-block&quot;&gt;&lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div data-bind=&quot;validationCss: postcode&quot; class=&quot;control-group&quot;&gt;
+            &lt;label for=&quot;postcode&quot; class=&quot;control-label&quot;&gt;Postcode&lt;/label&gt;
+
+            &lt;div class=&quot;controls&quot;&gt;
+                &lt;input id=&quot;postcode&quot; type=&quot;text&quot; data-bind=&quot;value: postcode&quot;/&gt;
+
+                &lt;div data-bind=&quot;validationMessageText: postcode&quot; class=&quot;help-block&quot;&gt;&lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre></noscript></div>
+
+
+<h2>Javascript</h2>
+
+<div><script src='https://gist.github.com/8b27a6ec3bc32c0f741d.js?file=fiddle.js'></script>
+<noscript><pre><code>function Address() {
+    return valerie.validatableModel({
+        &quot;street&quot;: ko.observable()
+            .validate()
+            .string()
+            .name(&quot;Street&quot;)
+            .required()
+            .minimumLength(5)
+            .end(),
+        &quot;town&quot;: ko.observable()
+            .validate()
+            .string()
+            .name(&quot;Town&quot;)
+            .required()
+            .minimumLength(2)
+            .end(),
+        &quot;postcode&quot;: ko.observable()
+            .validate()
+            .name(&quot;Postcode&quot;)
+            .required()
+            .postcode()
+            .end()
+    })
+        .name(&quot;Contact&quot;)
+        .validateChildProperties()
+        .end();
+}
+
+function ViewModel() {
+    var shipToBillingAddress = ko.observable(false)
+            .validate()
+            .name(&quot;Ship to Billing Address&quot;)
+            .end(),
+        self = valerie.validatableModel({
+            &quot;shipToBillingAddress&quot;: shipToBillingAddress,
+            &quot;billingAddress&quot;: new Address(),
+            &quot;shippingAddress&quot;: new Address()
+                .validation()
+                .applicable(ko.computed(function () {
+                    return !shipToBillingAddress();
+                }))
+                .end(),
+            &quot;submit&quot;: function () {
+                self.validation().touched(true);
+                self.validation().updateSummary(true);
+            }
+        })
+            .validateChildPropertiesAndSubModels()
+            .end();
+
+    return self;
+}
+
+var viewModel = new ViewModel();
+
+ko.bindingHandlers.validationCss.classNames.failed = &quot;error&quot;;
+ko.bindingHandlers.validationCss.classNames.passed = &quot;success&quot;;
+
+valerie.koBindingsHelper.useValidatingBindingHandlers();
+
+window.onload = function () {
+    ko.applyBindings(viewModel, document.getElementById(&quot;sample&quot;));
+};</code></pre></noscript></div>
+
+
+<h2>CSS</h2>
+
+<div><script src='https://gist.github.com/8b27a6ec3bc32c0f741d.js?file=fiddle.css'></script>
+<noscript><pre><code>.success .help-block {
+    display: none;
+}
+ 
+.untouched,
+.untouched input,
+.untouched label,
+.untouched select,
+.untouched textarea {
+    color: #333333 !important;
+    border-color: #cccccc !important;
+}
+ 
+.untouched .help-block {
+    display: none;
+}
+
+ul.alert {
+    margin: 0.5em 0 0.5em 0;
+}
+
+ul.alert li {
+    list-style: none;
+}
+
+.form-actions button span:after {
+    color: #fff;
+    content: &quot;✘&quot;;
+}
+
+.form-actions button span.success:after {
+    color: #fff;
+    content: &quot;✔&quot;;
+}</code></pre></noscript></div>
+
+
+<p>This sample can be seen running
+<a href="http://jsfiddle.net/gh/gist/knockout/2.2.1/8b27a6ec3bc32c0f741d/" title="Order Form /w Optionally Applicable Section /w Bootstrap">here</a> ⇗.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Simple Form (non-fluent) w/ Bootstrap]]></title>
