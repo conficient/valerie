@@ -4,7 +4,7 @@
   <title><![CDATA[Category: code-sample | valerie]]></title>
   <link href="http://valerie.egrove.co.uk/blog/categories/code-sample/atom.xml" rel="self"/>
   <link href="http://valerie.egrove.co.uk/"/>
-  <updated>2013-07-07T13:17:59+01:00</updated>
+  <updated>2013-07-07T13:34:48+01:00</updated>
   <id>http://valerie.egrove.co.uk/</id>
   <author>
     <name><![CDATA[egrove Ltd]]></name>
@@ -21,8 +21,8 @@
     <content type="html"><![CDATA[<p>This code sample demonstrates <strong>valerie</strong> being used to validate a simple form.</p>
 
 <p>Functionally it&rsquo;s the same as the
-<a href="/blog/2013/07/05/simple-form-fluent-with-bootstrap/">Simple Form w/ Bootstrap</a>, but it uses the
-non-fluent interface to configure the validation setting.</p>
+<a href="/blog/2013/07/05/simple-form-fluent-with-bootstrap/">Simple Form w/ Bootstrap sample </a>, but it uses the
+non-fluent interface to configure the validation settings.</p>
 
 <!-- more -->
 
