@@ -4,7 +4,7 @@
   <title><![CDATA[Category: bootstrap | valerie]]></title>
   <link href="http://valerie.egrove.co.uk/blog/categories/bootstrap/atom.xml" rel="self"/>
   <link href="http://valerie.egrove.co.uk/"/>
-  <updated>2013-07-06T23:15:25+01:00</updated>
+  <updated>2013-07-07T13:12:30+01:00</updated>
   <id>http://valerie.egrove.co.uk/</id>
   <author>
     <name><![CDATA[egrove Ltd]]></name>
@@ -14,10 +14,73 @@
 
   
   <entry>
+    <title type="html"><![CDATA[Simple Form (non-fluent) w/ Bootstrap]]></title>
+    <link href="http://valerie.egrove.co.uk/blog/2013/07/07/simple-form-non-fluent-with-bootstrap/"/>
+    <updated>2013-07-07T12:53:00+01:00</updated>
+    <id>http://valerie.egrove.co.uk/blog/2013/07/07/simple-form-non-fluent-with-bootstrap</id>
+    <content type="html"><![CDATA[<p>This code sample demonstrates <strong>valerie</strong> being used to validate a simple form.</p>
+
+<p>Functionally it&rsquo;s the same as the
+<a href="/blog/2013/07/05/simple-form-fluent-with-bootstrap/">Simple Form w/ Bootstrap</a>, but it uses the
+non-fluent interface to configure the validation setting.</p>
+
+<h2>Javascript</h2>
+
+<p><div><script src='https://gist.github.com/cc3403a597e3e7df3d60.js?file=fiddle.js'></script>
+<noscript><pre><code>var viewModel = {
+        &quot;firstName&quot;: ko.observable(),
+        &quot;surname&quot;: ko.observable(),
+        &quot;submit&quot;: function () {
+            viewModel.validation().touched(true);
+        },
+        &quot;reset&quot;: function () {
+            viewModel.firstName(&quot;&quot;);
+            viewModel.surname(&quot;&quot;);
+            viewModel.validation().touched(false);
+        }
+    },
+    viewModelValidationState = valerie.validatableModel(viewModel);
+
+viewModel.firstName.validate({
+    // The passThrough converter is the default converter,
+    // set here to illustrate the non-fluent interface.
+    &quot;converter&quot;: valerie.converters.passThrough,
+    &quot;required&quot;: true,
+    &quot;rules&quot;: [
+        new valerie.rules.StringLength(2, null)
+    ]
+});
+
+viewModel.surname.validate({
+    &quot;converter&quot;: valerie.converters.passThrough,
+    &quot;required&quot;: true,
+    &quot;rules&quot;: [
+        new valerie.rules.StringLength(2, null)
+    ]
+});
+
+viewModelValidationState.validateAll();
+
+ko.bindingHandlers.validationCss.classNames.failed = &quot;error&quot;;
+ko.bindingHandlers.validationCss.classNames.passed = &quot;success&quot;;
+
+window.onload = function () {
+    ko.applyBindings(viewModel, document.getElementById(&quot;sample&quot;));
+}</code></pre></noscript></div>
+
+&ndash; Lines <strong>15 &ndash; 23</strong> set the validation settings for the <code>firstName</code>  property
+&ndash; Lines <strong>25 &ndash; 31</strong> set the validation settings for the <code>surname</code> property</p>
+
+<p>This sample can be seen running
+<a href="http://jsfiddle.net/gh/gist/knockout/2.2.1/cc3403a597e3e7df3d60/" title="Simple Form (non-fluent) /w Bootstrap">here</a> ⇗.</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Simple Form (fluent) w/ Bootstrap]]></title>
-    <link href="http://valerie.egrove.co.uk/blog/2013/07/05/code-sample/"/>
+    <link href="http://valerie.egrove.co.uk/blog/2013/07/05/simple-form-fluent-with-bootstrap/"/>
     <updated>2013-07-05T22:34:00+01:00</updated>
-    <id>http://valerie.egrove.co.uk/blog/2013/07/05/code-sample</id>
+    <id>http://valerie.egrove.co.uk/blog/2013/07/05/simple-form-fluent-with-bootstrap</id>
     <content type="html"><![CDATA[<p>This code sample demonstrates <strong>valerie</strong> being used to validate a simple form.
 Bootstrap is used to style the form.</p>
 
@@ -88,6 +151,8 @@ window.onload = function () {
     ko.applyBindings(viewModel, document.getElementById(&quot;sample&quot;));
 }</code></pre></noscript></div>
 
+&ndash; Lines <strong>2 &ndash; 7</strong> set the validation settings for the <code>firstName</code>  property
+&ndash; Lines <strong>8 &ndash; 13</strong> set the validation settings for the <code>surname</code> property
 &ndash; Lines <strong>26 &ndash; 27</strong> override the default class-names for when validation fails
   or passed</p>
 
@@ -118,7 +183,7 @@ window.onload = function () {
 &ndash; Lines <strong>14 &ndash; 16</strong> hide Bootstrap help-blocks for model properties which
   haven&rsquo;t been <em>touched</em></p>
 
-<p>The sample can seen running
+<p>This sample can be seen running
 <a href="http://jsfiddle.net/gh/gist/knockout/2.2.1/10f486045f8d532d84fa/" title="Simple Form /w Bootstrap">here</a> ⇗.</p>
 ]]></content>
   </entry>
