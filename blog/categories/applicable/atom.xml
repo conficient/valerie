@@ -4,7 +4,7 @@
   <title><![CDATA[Category: applicable | valerie]]></title>
   <link href="http://valerie.egrove.co.uk/blog/categories/applicable/atom.xml" rel="self"/>
   <link href="http://valerie.egrove.co.uk/"/>
-  <updated>2013-07-07T14:34:32+01:00</updated>
+  <updated>2013-07-07T15:17:23+01:00</updated>
   <id>http://valerie.egrove.co.uk/</id>
   <author>
     <name><![CDATA[egrove Ltd]]></name>
@@ -30,6 +30,9 @@ form is valid.</p>
 
 <!-- more -->
 
+
+<p>This sample can be seen running
+<a href="http://jsfiddle.net/gh/gist/knockout/2.2.1/8b27a6ec3bc32c0f741d/" title="Order Form /w Optionally Applicable Section /w Bootstrap">here</a> ⇗.</p>
 
 <h2>HTML</h2>
 
@@ -209,9 +212,6 @@ ul.alert li {
     content: &quot;✔&quot;;
 }</code></pre></noscript></div>
 </p>
-
-<p>This sample can be seen running
-<a href="http://jsfiddle.net/gh/gist/knockout/2.2.1/8b27a6ec3bc32c0f741d/" title="Order Form /w Optionally Applicable Section /w Bootstrap">here</a> ⇗.</p>
 ]]></content>
   </entry>
   

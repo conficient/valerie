@@ -4,7 +4,7 @@
   <title><![CDATA[Category: code-sample | valerie]]></title>
   <link href="http://valerie.egrove.co.uk/blog/categories/code-sample/atom.xml" rel="self"/>
   <link href="http://valerie.egrove.co.uk/"/>
-  <updated>2013-07-07T14:34:32+01:00</updated>
+  <updated>2013-07-07T15:17:23+01:00</updated>
   <id>http://valerie.egrove.co.uk/</id>
   <author>
     <name><![CDATA[egrove Ltd]]></name>
@@ -25,6 +25,9 @@ contact-list form.</p>
 
 <!-- more -->
 
+
+<p>This sample can be seen running
+<a href="http://jsfiddle.net/gh/gist/knockout/2.2.1/2a227220a8c2d80328ba/" title="Contact List Form /w Bootstrap">here</a> ⇗.</p>
 
 <h2>HTML</h2>
 
@@ -225,9 +228,6 @@ th {
     text-align: left;
 }</code></pre></noscript></div>
 </p>
-
-<p>This sample can be seen running
-<a href="http://jsfiddle.net/gh/gist/knockout/2.2.1/2a227220a8c2d80328ba/" title="Contact List Form /w Bootstrap">here</a> ⇗.</p>
 ]]></content>
   </entry>
   
@@ -248,6 +248,9 @@ form is valid.</p>
 
 <!-- more -->
 
+
+<p>This sample can be seen running
+<a href="http://jsfiddle.net/gh/gist/knockout/2.2.1/8b27a6ec3bc32c0f741d/" title="Order Form /w Optionally Applicable Section /w Bootstrap">here</a> ⇗.</p>
 
 <h2>HTML</h2>
 
@@ -427,9 +430,6 @@ ul.alert li {
     content: &quot;✔&quot;;
 }</code></pre></noscript></div>
 </p>
-
-<p>This sample can be seen running
-<a href="http://jsfiddle.net/gh/gist/knockout/2.2.1/8b27a6ec3bc32c0f741d/" title="Order Form /w Optionally Applicable Section /w Bootstrap">here</a> ⇗.</p>
 ]]></content>
   </entry>
   
@@ -446,6 +446,9 @@ non-fluent interface to configure the validation settings.</p>
 
 <!-- more -->
 
+
+<p>This sample can be seen running
+<a href="http://jsfiddle.net/gh/gist/knockout/2.2.1/cc3403a597e3e7df3d60/" title="Simple Form (non-fluent) /w Bootstrap">here</a> ⇗.</p>
 
 <h2>Javascript</h2>
 
@@ -493,9 +496,6 @@ window.onload = function () {
 
 &ndash; Lines <strong>15 &ndash; 23</strong> set the validation settings for the <code>firstName</code>  property
 &ndash; Lines <strong>25 &ndash; 31</strong> set the validation settings for the <code>surname</code> property</p>
-
-<p>This sample can be seen running
-<a href="http://jsfiddle.net/gh/gist/knockout/2.2.1/cc3403a597e3e7df3d60/" title="Simple Form (non-fluent) /w Bootstrap">here</a> ⇗.</p>
 ]]></content>
   </entry>
   
@@ -509,6 +509,9 @@ Bootstrap is used to style the form.</p>
 
 <!-- more -->
 
+
+<p>This sample can be seen running
+<a href="http://jsfiddle.net/gh/gist/knockout/2.2.1/10f486045f8d532d84fa/" title="Simple Form /w Bootstrap">here</a> ⇗.</p>
 
 <h2>HTML</h2>
 
@@ -608,9 +611,6 @@ window.onload = function () {
   <em>neutralising</em> them if their model properties haven&rsquo;t been <em>touched</em>
 &ndash; Lines <strong>14 &ndash; 16</strong> hide Bootstrap help-blocks for model properties which
   haven&rsquo;t been <em>touched</em></p>
-
-<p>This sample can be seen running
-<a href="http://jsfiddle.net/gh/gist/knockout/2.2.1/10f486045f8d532d84fa/" title="Simple Form /w Bootstrap">here</a> ⇗.</p>
 ]]></content>
   </entry>
   
