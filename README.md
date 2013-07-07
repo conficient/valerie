@@ -39,29 +39,4 @@ one of:
 
 depending on which locale you need.
 
-
-###File Contents###
-
-The following list describes the contents of each of the files in the folder:
-
-- **valerie-core.js, valerie-core.min.js**
-  - binding handlers and helper functions
-  - DOM helper functions
-  - formatting functions
-  - classes for holding the validating states of models and properties
-  - utility functions
-- **valerie.js, valerie.min.js**
-  - _all of the above_
-  - the standard valeries converters and rules
-  - and a fluent interface for using them
-- **valerie-en.js, valerie-en.min.js**
-  - _all of the above_
-  - English message strings
-- **valerie-en-gb.js, valerie-en-gb.min.js**
-  - _all of the above_
-  - a Postcode converter and fluent methods for using it
-- **valerie-en-us.js, valerie-en-us.min.js**
-  - _all of the above (excluding any localisation)_
-  - settings for currency and date converters
-
 View the [API documentation](https://rawgithub.com/egrove/valerie/master/latest/apidocs/index.html).
