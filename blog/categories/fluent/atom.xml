@@ -4,7 +4,7 @@
   <title><![CDATA[Category: fluent | valerie]]></title>
   <link href="http://valerie.egrove.co.uk/blog/categories/fluent/atom.xml" rel="self"/>
   <link href="http://valerie.egrove.co.uk/"/>
-  <updated>2013-07-07T13:14:57+01:00</updated>
+  <updated>2013-07-07T13:17:59+01:00</updated>
   <id>http://valerie.egrove.co.uk/</id>
   <author>
     <name><![CDATA[egrove Ltd]]></name>
@@ -20,6 +20,9 @@
     <id>http://valerie.egrove.co.uk/blog/2013/07/05/simple-form-fluent-with-bootstrap</id>
     <content type="html"><![CDATA[<p>This code sample demonstrates <strong>valerie</strong> being used to validate a simple form.
 Bootstrap is used to style the form.</p>
+
+<!-- more -->
+
 
 <h2>HTML</h2>
 
