@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: validationName | valerie]]></title>
+  <link href="http://valerie.egrove.co.uk/blog/categories/validationname/atom.xml" rel="self"/>
+  <link href="http://valerie.egrove.co.uk/"/>
+  <updated>2013-07-09T19:58:22+01:00</updated>
+  <id>http://valerie.egrove.co.uk/</id>
+  <author>
+    <name><![CDATA[egrove Ltd]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Credentials Form]]></title>
+    <link href="http://valerie.egrove.co.uk/blog/2013/07/09/credentials-form/"/>
+    <updated>2013-07-09T16:23:00+01:00</updated>
+    <id>http://valerie.egrove.co.uk/blog/2013/07/09/credentials-form</id>
+    <content type="html"><![CDATA[<p>This code sample demonstrates <strong>valerie</strong> being used to validate a form for gathering credentials.</p>
+
+<p>It demonstrates how the <code>matches</code> rule and <code>validationName</code> bindings can be used.</p>
+
+<!-- more -->
+
+
+<p>This sample can be seen running
+<a href="http://jsfiddle.net/gh/gist/knockout/2.2.1/429ad22f47d59dea5acd/" title="Credentials Form">here</a> ⇗.</p>
+
+<h2>HTML</h2>
+
+<p><div><script src='https://gist.github.com/429ad22f47d59dea5acd.js?file=fiddle.html'></script>
+<noscript><pre><code>&lt;div id=&quot;sample&quot;&gt;
+    &lt;fieldset&gt;
+        &lt;legend&gt;Credentials&lt;/legend&gt;
+        &lt;div data-bind=&quot;validationCss: email&quot;&gt;
+            &lt;label&gt; &lt;span data-bind=&quot;validationName: email&quot;&gt;&lt;/span&gt;
+
+                &lt;input type=&quot;text&quot; data-bind=&quot;validatedValue: email&quot; /&gt;
+            &lt;/label&gt;&lt;span data-bind=&quot;validationMessage: email&quot; /&gt;
+        &lt;/div&gt;
+        &lt;div data-bind=&quot;validationCss: confirmEmail&quot;&gt;
+            &lt;label&gt; &lt;span data-bind=&quot;validationName: confirmEmail&quot;&gt;&lt;/span&gt;
+
+                &lt;input type=&quot;text&quot; data-bind=&quot;validatedValue: confirmEmail&quot; /&gt;
+            &lt;/label&gt;&lt;span data-bind=&quot;validationMessage: confirmEmail&quot; /&gt;
+        &lt;/div&gt;
+        &lt;div data-bind=&quot;validationCss: password&quot;&gt;
+            &lt;label&gt;
+                &lt;span data-bind=&quot;validationName: password&quot;&gt;&lt;/span&gt;
+                &lt;input type=&quot;password&quot; data-bind=&quot;validatedValue: password&quot; /&gt;
+            &lt;/label&gt;
+            &lt;span data-bind=&quot;validationMessage: password&quot;/&gt;
+        &lt;/div&gt;        
+        &lt;div data-bind=&quot;validationCss: confirmPassword&quot;&gt;
+            &lt;label&gt;
+                &lt;span data-bind=&quot;validationName: confirmPassword&quot;&gt;&lt;/span&gt;
+                &lt;input type=&quot;password&quot; data-bind=&quot;validatedValue: confirmPassword&quot; /&gt;
+            &lt;/label&gt;&lt;span data-bind=&quot;validationMessage: confirmPassword&quot; /&gt;
+        &lt;/div&gt;
+    &lt;/fieldset&gt;
+    &lt;input type=&quot;submit&quot; value=&quot;Submit&quot; data-bind=&quot;click: submit&quot; /&gt;
+&lt;/div&gt;</code></pre></noscript></div>
+
+&ndash; Lines <strong>6, 13, 20, 27</strong> set the text of the labels to be the validation name
+  of the properties</p>
+
+<h2>Javascript</h2>
+
+<p><div><script src='https://gist.github.com/429ad22f47d59dea5acd.js?file=fiddle.js'></script>
+<noscript><pre><code>var viewModel = valerie.validatableModel({
+    &quot;email&quot;: ko.observable()
+        .validate()
+        .name(&quot;Email&quot;)
+        .email()
+        .required()
+        .end(),
+    &quot;confirmEmail&quot;: ko.observable()
+        .validate()
+        .name(&quot;Confirm Email&quot;)
+        .email()
+        .required()
+        .end(),
+    &quot;password&quot;: ko.observable()
+        .validate()
+        .name(&quot;Password&quot;)
+        .string()
+        .required()
+        .minimumLength(8)
+        .end(),    
+    &quot;confirmPassword&quot;: ko.observable()
+        .validate()
+        .name(&quot;Confirm Password&quot;)
+        .string()
+        .required()
+        .minimumLength(8)
+        .end(),    
+    &quot;submit&quot;: function () {
+        viewModel.validation().touched(true);
+    }
+})
+    .validateAll()
+    .end();
+
+viewModel.confirmEmail.validation()
+    .matches(viewModel.email)
+    .ruleMessage(&quot;Email addresses must match.&quot;);
+
+viewModel.confirmPassword.validation()
+    .matches(viewModel.password)
+    .ruleMessage(&quot;Passwords must match.&quot;);
+
+window.onload = function () {
+    ko.applyBindings(viewModel, document.getElementById(&quot;sample&quot;));
+}</code></pre></noscript></div>
+
+&ndash; Lines <strong>34 &ndash; 36</strong> ensure the value of the <code>confirmEmail</code> property matches
+  the value of the <code>email</code> property
+&ndash; Lines <strong>38 &ndash; 40</strong> ensure the value of the <code>confirmPassword</code> property matches
+  the value of the <code>password</code> property</p>
+]]></content>
+  </entry>
+  
+</feed>

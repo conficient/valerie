@@ -5,12 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Simple Form (non-fluent) w/ Bootstrap - valerie - A validation library for KnockoutJS.</title>
+  <title>Credentials Form - valerie - A validation library for KnockoutJS.</title>
   <meta name="author" content="egrove Ltd">
 
   
-  <meta name="description" content="valerie, a Knockout validation library. This code sample demonstrates valerie being used to validate a simple form. Functionally it&rsquo;s the same as the
-Simple Form w/ Bootstrap sample &hellip;">
+  <meta name="description" content="valerie, a Knockout validation library. This code sample demonstrates valerie being used to validate a form for gathering credentials. It demonstrates how the matches rule and &hellip;">
   <meta name="keywords" content="knockout, knockoutjs, validation, library, valerie, alternative,">
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +18,7 @@ Simple Form w/ Bootstrap sample &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://valerie.egrove.co.uk/blog/2013/07/07/simple-form-non-fluent-with-bootstrap">
+  <link rel="canonical" href="http://valerie.egrove.co.uk/blog/2013/07/09/credentials-form">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="valerie" type="application/atom+xml">
@@ -81,7 +80,7 @@ Simple Form w/ Bootstrap sample &hellip;">
   
   <header>
     
-      <h1 class="entry-title">Simple Form (non-fluent) w/ Bootstrap</h1>
+      <h1 class="entry-title">Credentials Form</h1>
     
     
       <p class="meta">
@@ -97,64 +96,109 @@ Simple Form w/ Bootstrap sample &hellip;">
   
 
 
-<time datetime="2013-07-07T12:53:00+01:00" pubdate data-updated="true">7<span>th</span> July 2013 12:53</time>
+<time datetime="2013-07-09T16:23:00+01:00" pubdate data-updated="true">9<span>th</span> July 2013 16:23</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>This code sample demonstrates <strong>valerie</strong> being used to validate a simple form.</p>
+<div class="entry-content"><p>This code sample demonstrates <strong>valerie</strong> being used to validate a form for gathering credentials.</p>
 
-<p>Functionally it&rsquo;s the same as the
-<a href="/blog/2013/07/05/simple-form-fluent-with-bootstrap/">Simple Form w/ Bootstrap sample </a>, but it uses the
-non-fluent interface to configure the validation settings.</p>
+<p>It demonstrates how the <code>matches</code> rule and <code>validationName</code> bindings can be used.</p>
 
 <!-- more -->
 
 
 <p>This sample can be seen running
-<a href="http://jsfiddle.net/gh/gist/knockout/2.2.1/cc3403a597e3e7df3d60/" title="Simple Form (non-fluent) /w Bootstrap">here</a> ⇗.</p>
+<a href="http://jsfiddle.net/gh/gist/knockout/2.2.1/429ad22f47d59dea5acd/" title="Credentials Form">here</a> ⇗.</p>
+
+<h2>HTML</h2>
+
+<div><script src='https://gist.github.com/429ad22f47d59dea5acd.js?file=fiddle.html'></script>
+<noscript><pre><code>&lt;div id=&quot;sample&quot;&gt;
+    &lt;fieldset&gt;
+        &lt;legend&gt;Credentials&lt;/legend&gt;
+        &lt;div data-bind=&quot;validationCss: email&quot;&gt;
+            &lt;label&gt; &lt;span data-bind=&quot;validationName: email&quot;&gt;&lt;/span&gt;
+
+                &lt;input type=&quot;text&quot; data-bind=&quot;validatedValue: email&quot; /&gt;
+            &lt;/label&gt;&lt;span data-bind=&quot;validationMessage: email&quot; /&gt;
+        &lt;/div&gt;
+        &lt;div data-bind=&quot;validationCss: confirmEmail&quot;&gt;
+            &lt;label&gt; &lt;span data-bind=&quot;validationName: confirmEmail&quot;&gt;&lt;/span&gt;
+
+                &lt;input type=&quot;text&quot; data-bind=&quot;validatedValue: confirmEmail&quot; /&gt;
+            &lt;/label&gt;&lt;span data-bind=&quot;validationMessage: confirmEmail&quot; /&gt;
+        &lt;/div&gt;
+        &lt;div data-bind=&quot;validationCss: password&quot;&gt;
+            &lt;label&gt;
+                &lt;span data-bind=&quot;validationName: password&quot;&gt;&lt;/span&gt;
+                &lt;input type=&quot;password&quot; data-bind=&quot;validatedValue: password&quot; /&gt;
+            &lt;/label&gt;
+            &lt;span data-bind=&quot;validationMessage: password&quot;/&gt;
+        &lt;/div&gt;        
+        &lt;div data-bind=&quot;validationCss: confirmPassword&quot;&gt;
+            &lt;label&gt;
+                &lt;span data-bind=&quot;validationName: confirmPassword&quot;&gt;&lt;/span&gt;
+                &lt;input type=&quot;password&quot; data-bind=&quot;validatedValue: confirmPassword&quot; /&gt;
+            &lt;/label&gt;&lt;span data-bind=&quot;validationMessage: confirmPassword&quot; /&gt;
+        &lt;/div&gt;
+    &lt;/fieldset&gt;
+    &lt;input type=&quot;submit&quot; value=&quot;Submit&quot; data-bind=&quot;click: submit&quot; /&gt;
+&lt;/div&gt;</code></pre></noscript></div>
+
+
+<ul>
+<li>Lines <strong>6, 13, 20, 27</strong> set the text of the labels to be the validation name
+of the properties</li>
+</ul>
+
 
 <h2>Javascript</h2>
 
-<div><script src='https://gist.github.com/cc3403a597e3e7df3d60.js?file=fiddle.js'></script>
-<noscript><pre><code>var viewModel = {
-        &quot;firstName&quot;: ko.observable(),
-        &quot;surname&quot;: ko.observable(),
-        &quot;submit&quot;: function () {
-            viewModel.validation().touched(true);
-        },
-        &quot;reset&quot;: function () {
-            viewModel.firstName(&quot;&quot;);
-            viewModel.surname(&quot;&quot;);
-            viewModel.validation().touched(false);
-        }
-    },
-    viewModelValidationState = valerie.validatableModel(viewModel);
+<div><script src='https://gist.github.com/429ad22f47d59dea5acd.js?file=fiddle.js'></script>
+<noscript><pre><code>var viewModel = valerie.validatableModel({
+    &quot;email&quot;: ko.observable()
+        .validate()
+        .name(&quot;Email&quot;)
+        .email()
+        .required()
+        .end(),
+    &quot;confirmEmail&quot;: ko.observable()
+        .validate()
+        .name(&quot;Confirm Email&quot;)
+        .email()
+        .required()
+        .end(),
+    &quot;password&quot;: ko.observable()
+        .validate()
+        .name(&quot;Password&quot;)
+        .string()
+        .required()
+        .minimumLength(8)
+        .end(),    
+    &quot;confirmPassword&quot;: ko.observable()
+        .validate()
+        .name(&quot;Confirm Password&quot;)
+        .string()
+        .required()
+        .minimumLength(8)
+        .end(),    
+    &quot;submit&quot;: function () {
+        viewModel.validation().touched(true);
+    }
+})
+    .validateAll()
+    .end();
 
-viewModel.firstName.validate({
-    // The passThrough converter is the default converter,
-    // set here to illustrate the non-fluent interface.
-    &quot;converter&quot;: valerie.converters.passThrough,
-    &quot;required&quot;: true,
-    &quot;rules&quot;: [
-        new valerie.rules.StringLength(2, null)
-    ]
-});
+viewModel.confirmEmail.validation()
+    .matches(viewModel.email)
+    .ruleMessage(&quot;Email addresses must match.&quot;);
 
-viewModel.surname.validate({
-    &quot;converter&quot;: valerie.converters.passThrough,
-    &quot;required&quot;: true,
-    &quot;rules&quot;: [
-        new valerie.rules.StringLength(2, null)
-    ]
-});
-
-viewModelValidationState.validateAll();
-
-ko.bindingHandlers.validationCss.classNames.failed = &quot;error&quot;;
-ko.bindingHandlers.validationCss.classNames.passed = &quot;success&quot;;
+viewModel.confirmPassword.validation()
+    .matches(viewModel.password)
+    .ruleMessage(&quot;Passwords must match.&quot;);
 
 window.onload = function () {
     ko.applyBindings(viewModel, document.getElementById(&quot;sample&quot;));
@@ -162,8 +206,10 @@ window.onload = function () {
 
 
 <ul>
-<li>Lines <strong>15 &ndash; 23</strong> set the validation settings for the <code>firstName</code>  property</li>
-<li>Lines <strong>25 &ndash; 31</strong> set the validation settings for the <code>surname</code> property</li>
+<li>Lines <strong>34 &ndash; 36</strong> ensure the value of the <code>confirmEmail</code> property matches
+the value of the <code>email</code> property</li>
+<li>Lines <strong>38 &ndash; 40</strong> ensure the value of the <code>confirmPassword</code> property matches
+the value of the <code>password</code> property</li>
 </ul>
 
 </div>
@@ -188,12 +234,12 @@ window.onload = function () {
   
 
 
-<time datetime="2013-07-07T12:53:00+01:00" pubdate data-updated="true">7<span>th</span> July 2013 12:53</time>
+<time datetime="2013-07-09T16:23:00+01:00" pubdate data-updated="true">9<span>th</span> July 2013 16:23</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/bootstrap/'>bootstrap</a>, <a class='category' href='/blog/categories/code-sample/'>code-sample</a>, <a class='category' href='/blog/categories/non-fluent/'>non-fluent</a>
+    <a class='category' href='/blog/categories/code-sample/'>code-sample</a>, <a class='category' href='/blog/categories/matches/'>matches</a>, <a class='category' href='/blog/categories/validationname/'>validationName</a>
   
 </span>
 
@@ -202,7 +248,7 @@ window.onload = function () {
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://valerie.egrove.co.uk/blog/2013/07/07/simple-form-non-fluent-with-bootstrap/" data-via="egrovesoftware" data-counturl="http://valerie.egrove.co.uk/blog/2013/07/07/simple-form-non-fluent-with-bootstrap/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://valerie.egrove.co.uk/blog/2013/07/09/credentials-form/" data-via="egrovesoftware" data-counturl="http://valerie.egrove.co.uk/blog/2013/07/09/credentials-form/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -215,10 +261,8 @@ window.onload = function () {
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2013/07/05/simple-form-fluent-with-bootstrap/" title="Previous Post: Simple Form (fluent) w/ Bootstrap">&laquo; Simple Form (fluent) w/ Bootstrap</a>
+        <a class="basic-alignment left" href="/blog/2013/07/07/contact-list-form-with-bootstrap/" title="Previous Post: Contact List Form (fluent) w/ Bootstrap">&laquo; Contact List Form (fluent) w/ Bootstrap</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2013/07/07/order-form-applicable-section-with-bootstrap/" title="Next Post: Order Form with Optionally Applicable Section (fluent) w/ Bootstrap">Order Form with Optionally Applicable Section (fluent) w/ Bootstrap &raquo;</a>
       
     </p>
   </footer>
@@ -290,8 +334,8 @@ window.onload = function () {
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://valerie.egrove.co.uk/blog/2013/07/07/simple-form-non-fluent-with-bootstrap/';
-        var disqus_url = 'http://valerie.egrove.co.uk/blog/2013/07/07/simple-form-non-fluent-with-bootstrap/';
+        var disqus_identifier = 'http://valerie.egrove.co.uk/blog/2013/07/09/credentials-form/';
+        var disqus_url = 'http://valerie.egrove.co.uk/blog/2013/07/09/credentials-form/';
         var disqus_script = 'embed.js';
       
     (function () {
