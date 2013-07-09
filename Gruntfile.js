@@ -10,7 +10,7 @@ module.exports = function (grunt) {
             ]
         },
         "compress": {
-            "apiDocs": {
+            "apidocs": {
                 "options": {
                     "archive": "apiDocs.zip",
                     "mode": "zip"
