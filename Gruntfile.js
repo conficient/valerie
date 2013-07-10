@@ -138,6 +138,12 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks("grunt-contrib-uglify");
     grunt.loadNpmTasks("grunt-shell");
 
+    grunt.registerTask("apidocs", [
+        "clean:apidocs",
+        "shell:apidocs",
+        "compress:apidocs"
+    ]);
+
     grunt.registerTask("default", [
         "build"
     ]);
@@ -157,14 +163,13 @@ module.exports = function (grunt) {
         "jshint"
     ]);
 
+    grunt.registerTask("release", [
+        "build",
+        "apidocs"
+    ]);
+
     grunt.registerTask("tests", [
         "build",
         "jasmine"
-    ]);
-
-    grunt.registerTask("apidocs", [
-        "clean:apidocs",
-        "shell:apidocs",
-        "compress:apidocs"
     ]);
 };
