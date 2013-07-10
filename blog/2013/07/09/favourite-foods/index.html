@@ -5,12 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Blog Archive - valerie - A validation library for KnockoutJS.</title>
+  <title>Favourite Foods - valerie - A validation library for KnockoutJS.</title>
   <meta name="author" content="egrove Ltd">
 
   
-  <meta name="description" content="valerie, a Knockout validation library. Blog Archive 2013 Favourite Foods
-Jul 09 2013 posted in code-sample, disabledWhenNotValid, noneOf, not, rule-chaining, validationName Credentials &hellip;">
+  <meta name="description" content="valerie, a Knockout validation library. This code sample demonstrates valerie being used to validate a form for
+gathering someone&rsquo;s favourite foods. It demonstrates: how the noneOf &hellip;">
   <meta name="keywords" content="knockout, knockoutjs, validation, library, valerie, alternative,">
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +19,7 @@ Jul 09 2013 posted in code-sample, disabledWhenNotValid, noneOf, not, rule-chain
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://valerie.egrove.co.uk/blog/archives">
+  <link rel="canonical" href="http://valerie.egrove.co.uk/blog/2013/07/09/favourite-foods">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="valerie" type="application/atom+xml">
@@ -77,105 +77,179 @@ Jul 09 2013 posted in code-sample, disabledWhenNotValid, noneOf, not, rule-chain
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Blog Archive</h1>
+    
+      <h1 class="entry-title">Favourite Foods</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-09T21:46:00+01:00" pubdate data-updated="true">9<span>th</span> July 2013 21:46</time>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives">
 
 
+<div class="entry-content"><p>This code sample demonstrates <strong>valerie</strong> being used to validate a form for
+gathering someone&rsquo;s favourite foods.</p>
 
-  
-  <h2>2013</h2>
+<p>It demonstrates:</p>
 
-<article>
-  
-<h1><a href="/blog/2013/07/09/favourite-foods/">Favourite Foods</a></h1>
-<time datetime="2013-07-09T21:46:00+01:00" pubdate><span class='month'>Jul</span> <span class='day'>09</span> <span class='year'>2013</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/code-sample/'>code-sample</a>, <a class='category' href='/blog/categories/disabledwhennotvalid/'>disabledWhenNotValid</a>, <a class='category' href='/blog/categories/noneof/'>noneOf</a>, <a class='category' href='/blog/categories/not/'>not</a>, <a class='category' href='/blog/categories/rule-chaining/'>rule-chaining</a>, <a class='category' href='/blog/categories/validationname/'>validationName</a></span>
-</footer>
+<ul>
+<li>how the <code>noneOf</code> and <code>not</code> rules can be used</li>
+<li>how rules can be chained together</li>
+<li>the <code>disabledWhenNotValid</code> binding</li>
+</ul>
 
 
-</article>
+<!-- more -->
 
 
+<p>This sample can be seen running
+<a href="http://jsfiddle.net/gh/gist/knockout/2.2.1/6203d05150de9baf7015/" title="Favourite Foods Form">here</a> ⇗.</p>
 
-<article>
-  
-<h1><a href="/blog/2013/07/09/credentials-form/">Credentials Form</a></h1>
-<time datetime="2013-07-09T16:23:00+01:00" pubdate><span class='month'>Jul</span> <span class='day'>09</span> <span class='year'>2013</span></time>
+<h2>HTML</h2>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/code-sample/'>code-sample</a>, <a class='category' href='/blog/categories/matches/'>matches</a>, <a class='category' href='/blog/categories/validationname/'>validationName</a></span>
-</footer>
+<div><script src='https://gist.github.com/6203d05150de9baf7015.js?file=fiddle.html'></script>
+<noscript><pre><code>&lt;div id=&quot;sample&quot; class=&quot;form-horizontal&quot;&gt;
+     &lt;h2&gt;Favourite Foods&lt;/h2&gt;
 
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/blog/2013/07/07/contact-list-form-with-bootstrap/">Contact List Form (fluent) w/ Bootstrap</a></h1>
-<time datetime="2013-07-07T14:29:00+01:00" pubdate><span class='month'>Jul</span> <span class='day'>07</span> <span class='year'>2013</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/bootstrap/'>bootstrap</a>, <a class='category' href='/blog/categories/code-sample/'>code-sample</a>, <a class='category' href='/blog/categories/fluent/'>fluent</a></span>
-</footer>
+    &lt;p&gt;No one likes &lt;strong&gt;brussel sprouts&lt;/strong&gt;!&lt;/p&gt;
+    &lt;ul data-bind=&quot;foreach: favourites&quot;&gt;
+        &lt;li&gt;
+            &lt;button data-bind=&quot;click: $root.remove.bind($data, $index)&quot;&gt;-&lt;/button&gt;
+            &lt;span data-bind=&quot;text: $data&quot;&gt;&lt;/span&gt;
+        &lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;fieldset&gt;
+        &lt;button data-bind=&quot;click: add, disabledWhenNotValid: newFavourite&quot;&gt;+&lt;/button&gt;
+        &lt;input type=&quot;text&quot; data-bind=&quot;value: newFavourite, validationCss: true&quot; /&gt;
+    &lt;/fieldset&gt;
+&lt;/div&gt;</code></pre></noscript></div>
 
 
-</article>
+<h2>Javascript</h2>
+
+<div><script src='https://gist.github.com/6203d05150de9baf7015.js?file=fiddle.js'></script>
+<noscript><pre><code>var favourites = ko.observableArray([
+    &quot;chips&quot;,
+    &quot;pizza&quot;,
+    &quot;lasagne&quot;,
+    &quot;curry&quot;]),
+    viewModel = valerie.validatableModel({
+        &quot;favourites&quot;: favourites,
+        &quot;newFavourite&quot;: ko.observable(&quot;new&quot;).validate()
+            .string()
+            .minimumLength(3)
+            .noneOf(favourites)
+            .not(&quot;brussel sprouts&quot;)
+            .end(),
+        &quot;add&quot;: function () {
+            favourites.push(viewModel.newFavourite());
+        },
+        &quot;remove&quot;: function (index) {
+            favourites.splice(index(), 1);
+        }
+    })
+        .validateChildProperties()
+        .end();
+
+valerie.koBindingsHelper.useValidatingBindingHandlers();
+
+window.onload = function () {
+    ko.applyBindings(viewModel, document.getElementById(&quot;sample&quot;));
+};</code></pre></noscript></div>
 
 
+<h2>CSS</h2>
 
-<article>
-  
-<h1><a href="/blog/2013/07/07/order-form-applicable-section-with-bootstrap/">Order Form with Optionally Applicable Section (fluent) w/ Bootstrap</a></h1>
-<time datetime="2013-07-07T14:09:00+01:00" pubdate><span class='month'>Jul</span> <span class='day'>07</span> <span class='year'>2013</span></time>
+<div><script src='https://gist.github.com/6203d05150de9baf7015.js?file=fiddle.css'></script>
+<noscript><pre><code>ul {
+    list-style: none;
+    margin: 0;
+}
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/applicable/'>applicable</a>, <a class='category' href='/blog/categories/bootstrap/'>bootstrap</a>, <a class='category' href='/blog/categories/code-sample/'>code-sample</a>, <a class='category' href='/blog/categories/fluent/'>fluent</a></span>
-</footer>
+li {
+    margin: 0 0 0.5em 0;
+}
 
+.failed {
+    background-color: red;
+    color: white;
+}
 
-</article>
-
-
-
-<article>
-  
-<h1><a href="/blog/2013/07/07/simple-form-non-fluent-with-bootstrap/">Simple Form (non-fluent) w/ Bootstrap</a></h1>
-<time datetime="2013-07-07T12:53:00+01:00" pubdate><span class='month'>Jul</span> <span class='day'>07</span> <span class='year'>2013</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/bootstrap/'>bootstrap</a>, <a class='category' href='/blog/categories/code-sample/'>code-sample</a>, <a class='category' href='/blog/categories/non-fluent/'>non-fluent</a></span>
-</footer>
-
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/blog/2013/07/05/simple-form-fluent-with-bootstrap/">Simple Form (fluent) w/ Bootstrap</a></h1>
-<time datetime="2013-07-05T22:34:00+01:00" pubdate><span class='month'>Jul</span> <span class='day'>05</span> <span class='year'>2013</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/bootstrap/'>bootstrap</a>, <a class='category' href='/blog/categories/code-sample/'>code-sample</a>, <a class='category' href='/blog/categories/fluent/'>fluent</a></span>
-</footer>
-
-
-</article>
+button {
+    width: 2em;
+}</code></pre></noscript></div>
 
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">egrove Ltd</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-09T21:46:00+01:00" pubdate data-updated="true">9<span>th</span> July 2013 21:46</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/code-sample/'>code-sample</a>, <a class='category' href='/blog/categories/disabledwhennotvalid/'>disabledWhenNotValid</a>, <a class='category' href='/blog/categories/noneof/'>noneOf</a>, <a class='category' href='/blog/categories/not/'>not</a>, <a class='category' href='/blog/categories/rule-chaining/'>rule-chaining</a>, <a class='category' href='/blog/categories/validationname/'>validationName</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://valerie.egrove.co.uk/blog/2013/07/09/favourite-foods/" data-via="egrovesoftware" data-counturl="http://valerie.egrove.co.uk/blog/2013/07/09/favourite-foods/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/07/09/credentials-form/" title="Previous Post: Credentials Form">&laquo; Credentials Form</a>
+      
+      
+    </p>
+  </footer>
 </article>
 
 </div>
