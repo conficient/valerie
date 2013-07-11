@@ -4,6 +4,35 @@
     function testFunction() {
     }
 
+    describe("areEqual", function () {
+        it("should consider these value pairs as equal", function () {
+            expect(utils.areEqual(null, null)).toBeTruthy();
+            expect(utils.areEqual("a", "a")).toBeTruthy()
+            expect(utils.areEqual(1, 1)).toBeTruthy();
+            expect(utils.areEqual(new Date(2001, 1, 1), new Date(2001, 1, 1))).toBeTruthy();
+        });
+
+        it("should consider these value pairs as being unequal", function () {
+            expect(utils.areEqual(null, "b")).toBeFalsy();
+            expect(utils.areEqual("a", null)).toBeFalsy();
+            expect(utils.areEqual("a", "b")).toBeFalsy();
+            expect(utils.areEqual(1, 2)).toBeFalsy();
+            expect(utils.areEqual(new Date(2001, 1, 1), new Date(2001, 1, 2))).toBeFalsy();
+        });
+    });
+
+    describe("asArray", function () {
+        it("should return an array regardless of what is passed in", function () {
+            expect(utils.isArray(utils.asArray())).toBeTruthy();
+            expect(utils.isArray(utils.asArray(undefined))).toBeTruthy();
+            expect(utils.isArray(utils.asArray(null))).toBeTruthy();
+            expect(utils.isArray(utils.asArray([]))).toBeTruthy();
+            expect(utils.isArray(utils.asArray([1, 2, 3]))).toBeTruthy();
+            expect(utils.isArray(utils.asArray("1"))).toBeTruthy();
+            expect(utils.isArray(utils.asArray(1))).toBeTruthy();
+        });
+    });
+
     describe("asFunction", function () {
         var asFunction = utils.asFunction;
 

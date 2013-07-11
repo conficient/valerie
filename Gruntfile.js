@@ -89,8 +89,8 @@ module.exports = function (grunt) {
                         "tests/full/*.tests.js"
                     ],
                     "vendor": [
-                        "thirdParty/knockout-2.2.1.js",
-                        "thirdParty/jquery-1.9.1.min.js"
+                        "tests/knockout-2.2.1.js",
+                        "tests/jquery-1.9.1.min.js"
                     ]
                 }
             }
