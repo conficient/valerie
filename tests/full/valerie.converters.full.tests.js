@@ -168,7 +168,7 @@ describe("converters", function () {
         });
     });
     describe("float", function () {
-        var converter = valerie.converters.float;
+        var converter = valerie.converters["float"];
 
         describe("parse", function () {
             it("should parse these strings into floats", function () {
