@@ -31,6 +31,36 @@ describe("PropertyValidationState", function () {
         });
     });
 
+    describe("failed, message, passed and pending", function () {
+        it("should all derive from result", function () {
+            var property = ko.observable("some value"),
+                validationState = new valerie.PropertyValidationState(property, {
+                    "missingFailureMessage": "value required",
+                    "required": true
+                });
+
+            expect(validationState.result().state === ValidationResult.states.failed).toEqual(validationState.failed());
+            expect(validationState.result().state === ValidationResult.states.passed).toEqual(validationState.passed());
+            expect(validationState.result().state === ValidationResult.states.pending).toEqual(validationState.pending());
+            expect(validationState.result().message === validationState.message());
+
+            property("");
+            expect(validationState.result().state === ValidationResult.states.failed).toEqual(validationState.failed());
+            expect(validationState.result().state === ValidationResult.states.passed).toEqual(validationState.passed());
+            expect(validationState.result().state === ValidationResult.states.pending).toEqual(validationState.pending());
+            expect(validationState.result().message === validationState.message() === "value required");
+        });
+
+        it("should be true when the property is in an invalid state", function () {
+            var property = ko.observable(),
+                validationState = new valerie.PropertyValidationState(property, {
+                    "required": true
+                });
+
+            expect(validationState.failed()).toBeTruthy();
+        });
+    });
+
     describe("passed", function () {
         it("should be true when the property is in a valid state", function () {
             var property = ko.observable("some value"),
@@ -48,33 +78,6 @@ describe("PropertyValidationState", function () {
                 });
 
             expect(validationState.passed()).toBeFalsy();
-        });
-    });
-
-    describe("failed, passed and pending", function () {
-        it("should all derive from result", function () {
-            var property = ko.observable("some value"),
-                validationState = new valerie.PropertyValidationState(property, {
-                    "required": true
-                });
-
-            expect(validationState.result().state === ValidationResult.states.failed).toEqual(validationState.failed());
-            expect(validationState.result().state === ValidationResult.states.passed).toEqual(validationState.passed());
-            expect(validationState.result().state === ValidationResult.states.pending).toEqual(validationState.pending());
-
-            property("");
-            expect(validationState.result().state === ValidationResult.states.failed).toEqual(validationState.failed());
-            expect(validationState.result().state === ValidationResult.states.passed).toEqual(validationState.passed());
-            expect(validationState.result().state === ValidationResult.states.pending).toEqual(validationState.pending());
-        });
-
-        it("should be true when the property is in an invalid state", function () {
-            var property = ko.observable(),
-                validationState = new valerie.PropertyValidationState(property, {
-                    "required": true
-                });
-
-            expect(validationState.failed()).toBeTruthy();
         });
     });
 });
