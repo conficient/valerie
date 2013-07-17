@@ -62,4 +62,4 @@ describe("PropertyValidationState - Fluent Converters", function () {
             expect(propertyValidationState.settings.converter).toEqual(valerie.converters.passThrough);
         });
     });
-})
+});
