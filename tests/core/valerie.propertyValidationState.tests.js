@@ -50,15 +50,6 @@ describe("PropertyValidationState", function () {
             expect(validationState.result().state === ValidationResult.states.pending).toEqual(validationState.pending());
             expect(validationState.result().message === validationState.message() === "value required");
         });
-
-        it("should be true when the property is in an invalid state", function () {
-            var property = ko.observable(),
-                validationState = new valerie.PropertyValidationState(property, {
-                    "required": true
-                });
-
-            expect(validationState.failed()).toBeTruthy();
-        });
     });
 
     describe("passed", function () {
