@@ -90,7 +90,8 @@ module.exports = function (grunt) {
                     ],
                     "vendor": [
                         "tests/knockout-2.2.1.js",
-                        "tests/jquery-1.9.1.min.js"
+                        "tests/jquery-1.9.1.min.js",
+                        "tests/jquery.simulate.js"
                     ]
                 }
             }
