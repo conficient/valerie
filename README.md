@@ -15,6 +15,7 @@ Features include:
 - static and dynamic validation summaries
 - easy to extend, localise, customise
 - fits in with your markup
+- **extensive** unit tests
 - designed to work with older browsers _(just like Knockout itself)_
 
 ## Dependencies ##
