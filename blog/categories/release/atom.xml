@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: release | valerie]]></title>
+  <link href="http://valerie.egrove.co.uk/blog/categories/release/atom.xml" rel="self"/>
+  <link href="http://valerie.egrove.co.uk/"/>
+  <updated>2013-07-19T16:56:51+01:00</updated>
+  <id>http://valerie.egrove.co.uk/</id>
+  <author>
+    <name><![CDATA[egrove Ltd]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[v1.0.0 released.]]></title>
+    <link href="http://valerie.egrove.co.uk/blog/2013/07/19/v1-dot-0-0-released/"/>
+    <updated>2013-07-19T16:54:00+01:00</updated>
+    <id>http://valerie.egrove.co.uk/blog/2013/07/19/v1-dot-0-0-released</id>
+    <content type="html"><![CDATA[<p>The first production ready release (v1.0.0) of <strong>valerie</strong> is now available.</p>
+
+<p>You can download it from
+<a href="https://github.com/egrove/valerie/releases/tag/v1.0.0" title="v1.0.0 release">GitHub</a> ⇗.</p>
+]]></content>
+  </entry>
+  
+</feed>
