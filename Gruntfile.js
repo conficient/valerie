@@ -36,6 +36,7 @@ module.exports = function (grunt) {
                     "lib/core/valerie.validationState.js",
                     "lib/core/valerie.modelValidationState.js",
                     "lib/core/valerie.propertyValidationState.js",
+                    "lib/core/valerie.modelMapping.js",
                     "lib/core/ko.computed.fn.js",
                     "lib/core/ko.observable.fn.js",
                     "lib/core/valerie.koBindingsHelper.js",
