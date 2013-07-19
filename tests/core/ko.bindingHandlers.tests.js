@@ -203,15 +203,24 @@ describe("ko.bindingHandlers", function () {
         it("should set class names on the bound element depending on the validation state", function () {
             $element.append($("<input type='text' data-bind='validationCss: aValue, validatedValue: aValue'>"));
 
-            var viewModel = {"aValue": ko.observable(123).validate().currencyMajor().required().end()},
+            var required = ko.observable(true),
+                applicable = ko.observable(true),
+                viewModel = {"aValue": ko.observable(123).validate()
+                    .currencyMajor()
+                    .required(required)
+                    .applicable(applicable)
+                    .end()
+                },
                 $input = $($element.find("input")[0]);
 
             ko.applyBindings(viewModel, element);
 
+            expect($input.hasClass("applicable")).toBeTruthy();
             expect($input.hasClass("failed")).toBeFalsy();
             expect($input.hasClass("focused")).toBeFalsy();
             expect($input.hasClass("passed")).toBeTruthy();
             expect($input.hasClass("pending")).toBeFalsy();
+            expect($input.hasClass("required")).toBeTruthy();
             expect($input.hasClass("touched")).toBeFalsy();
             expect($input.hasClass("untouched")).toBeTruthy();
 
@@ -223,6 +232,12 @@ describe("ko.bindingHandlers", function () {
             expect($input.hasClass("failed")).toBeTruthy();
             expect($input.hasClass("passed")).toBeFalsy();
             expect($input.hasClass("pending")).toBeFalsy();
+
+            applicable(false);
+            expect($input.hasClass("applicable")).toBeFalsy();
+
+            required(false);
+            expect($input.hasClass("required")).toBeFalsy();
 
             $input.simulate("focus");
             expect($input.hasClass("focused")).toBeTruthy();
