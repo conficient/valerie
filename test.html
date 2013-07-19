@@ -1,0 +1,124 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>Contact List Form (fluent) w/ Bootstrap - jsFiddle demo</title>
+
+    <script type='text/javascript' src='tests/knockout-2.2.1.js'></script>
+
+
+
+
+
+
+
+
+
+
+    <script type='text/javascript' src="build/valerie-en-gb.js"></script>
+
+
+    <style type='text/css'>
+        .help-block {
+            margin-top: 0 !important;
+        }
+
+        .success .help-block {
+            display: none;
+        }
+
+            /* Forms */
+        form {
+            margin: 0;
+        }
+
+        input,
+        select,
+        textarea {
+            border: 1px #cccccc solid;
+        }
+
+        .untouched,
+        .untouched input,
+        .untouched label,
+        .untouched select,
+        .untouched textarea {
+            color: #333333 !important;
+            border-color: #cccccc !important;
+        }
+
+        .untouched .help-block {
+            display: none;
+        }
+
+        ul.alert {
+            margin: 0.5em 0 0.5em 0;
+        }
+
+        ul.alert li {
+            list-style: none;
+        }
+
+        th {
+            text-align: left;
+        }
+    </style>
+
+
+
+    <script type='text/javascript'>//<![CDATA[
+    var VanillaRunOnDomReady = function() {
+
+        var viewModel = {
+            wantsSpam: ko.observable(true),
+            spamFlavors: ko.observableArray(["cherry","almond"]).validate().numberOfItems(2, null).end() // Initially checks the Cherry and Almond checkboxes
+        };
+
+        valerie.koBindingsHelper.useValidatingBindingHandlers();
+        ko.applyBindings(viewModel, document.body);
+    }
+
+    var alreadyrunflag = 0;
+
+    if (document.addEventListener)
+        document.addEventListener("DOMContentLoaded", function(){
+            alreadyrunflag=1;
+            VanillaRunOnDomReady();
+        }, false);
+    else if (document.all && !window.opera) {
+        document.write('<script type="text/javascript" id="contentloadtag" defer="defer" src="javascript:void(0)"><\/script>');
+        var contentloadtag = document.getElementById("contentloadtag")
+        contentloadtag.onreadystatechange=function(){
+            if (this.readyState=="complete"){
+                alreadyrunflag=1;
+                VanillaRunOnDomReady();
+            }
+        }
+    }
+
+    window.onload = function(){
+        setTimeout("if (!alreadyrunflag){VanillaRunOnDomReady}", 0);
+    }//]]>
+
+    </script>
+
+
+</head>
+<body>
+<p>Send me spam: <input type="checkbox" data-bind="checked: wantsSpam" /></p>
+<div data-bind="visible: wantsSpam">
+    Preferred flavors of spam:
+    <div><input type="checkbox" value="cherry" data-bind="checked: spamFlavors" /> Cherry</div>
+    <div><input type="checkbox" value="almond" data-bind="checked: spamFlavors" /> Almond</div>
+    <div><input type="checkbox" value="msg" data-bind="checked: spamFlavors" /> Monosodium Glutamate</div>
+</div>
+
+<div data-bind="validationMessage: spamFlavors, validationCss: spamFlavors"></div>
+
+
+</body>
+
+
+</html>
+
